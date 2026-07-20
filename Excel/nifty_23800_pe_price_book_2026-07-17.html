@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5">
+<title>NIFTY 23800 PE (21-Jul) &middot; Price Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #08090c;
+        --bg-glow: #10141d;
+        --panel: #11151d;
+        --panel-2: #151a24;
+        --border: #232a38;
+        --text: #e8ecf1;
+        --muted: #6f7a8a;
+        --buy: #00d38a;
+        --buy-dim: rgba(0,211,138,0.12);
+        --sell: #ff4d6a;
+        --sell-dim: rgba(255,77,106,0.12);
+        --amber: #f5b53f;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        background:
+            radial-gradient(1100px 500px at 12% -10%, var(--bg-glow), transparent 60%),
+            var(--bg);
+        color: var(--text);
+        padding: 44px 24px 60px;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 26px;
+    }
+    .title-block h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin: 0 0 4px;
+    }
+    .title-block .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--amber);
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+    }
+    .live-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: var(--amber);
+        box-shadow: 0 0 0 0 rgba(245,181,63,0.6);
+        animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(245,181,63,0.55); }
+        70%  { box-shadow: 0 0 0 8px rgba(245,181,63,0); }
+        100% { box-shadow: 0 0 0 0 rgba(245,181,63,0); }
+    }
+    .subtitle { color: var(--muted); font-size: 12.5px; }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .stat {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+    }
+    .stat .label {
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--muted);
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+    .stat .value { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat .value.buy { color: var(--buy); }
+    .stat .value.sell { color: var(--sell); }
+
+    .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+        text-align: right;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--muted);
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel-2);
+    }
+    thead th:first-child { text-align: left; }
+    tbody td {
+        text-align: right;
+        padding: 13px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.035);
+        font-variant-numeric: tabular-nums;
+        font-size: 13.5px;
+        vertical-align: middle;
+    }
+    tbody tr.row { transition: background 0.2s; }
+    tbody tr.row:hover { background: rgba(255,255,255,0.02); }
+    tbody tr.fresh { background: rgba(245,181,63,0.05); }
+    tbody tr.fresh td.price { position: relative; }
+    tbody tr.fresh td.price::before {
+        content: "";
+        position: absolute; left: -10px; top: 50%;
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--amber);
+        transform: translateY(-50%);
+        animation: pulse 1.8s infinite;
+    }
+    td.price { text-align: left; font-weight: 600; color: var(--text); padding-left: 26px; }
+    td.bid { color: var(--buy); }
+    td.ask { color: var(--sell); }
+    td.net-cell { min-width: 190px; }
+    td.net-cell > span:last-child { display: inline-block; min-width: 64px; font-weight: 600; }
+    .net-positive { color: var(--buy); }
+    .net-negative { color: var(--sell); }
+    .net-neutral { color: var(--muted); }
+    .imbalance-track {
+        position: relative;
+        display: inline-block;
+        width: 80px;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(255,255,255,0.06);
+        vertical-align: middle;
+        margin-right: 10px;
+        overflow: hidden;
+    }
+    .imbalance-mid {
+        position: absolute; left: 50%; top: -2px;
+        width: 1px; height: 10px;
+        background: rgba(255,255,255,0.15);
+    }
+    .imbalance-fill {
+        position: absolute; top: 0; height: 100%;
+        border-radius: 3px;
+    }
+    .imbalance-fill.bar-buy { left: 50%; background: var(--buy); }
+    .imbalance-fill.bar-sell { right: 50%; background: var(--sell); }
+    td.time { color: var(--muted); font-size: 11.5px; }
+    td.total-qty { color: var(--text); font-weight: 600; }
+    td.empty { text-align: center; color: var(--muted); padding: 48px 0; font-size: 13px; }
+
+    footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 18px;
+        letter-spacing: 0.3px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="title-block">
+            <div class="eyebrow"><span class="live-dot"></span>Live &middot; Depth level 5</div>
+            <h1>NIFTY 23800 PE (21-Jul)</h1>
+            <div class="subtitle">Auto-refreshes every 5s &middot; 83 price levels tracked</div>
+        </div>
+    </header>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="label">Total Bid Qty</div>
+            <div class="value buy">14,819,610</div>
+        </div>
+        <div class="stat">
+            <div class="label">Total Ask Qty</div>
+            <div class="value sell">17,121,065</div>
+        </div>
+        <div class="stat">
+            <div class="label">Net Imbalance</div>
+            <div class="value net-negative">-2,301,455</div>
+        </div>
+        <div class="stat">
+            <div class="label">Total Qty Traded</div>
+            <div class="value">31,940,675</div>
+        </div>
+        <div class="stat">
+            <div class="label">Last Refresh</div>
+            <div class="value">14:53:39</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Strike Price</th>
+                    <th>Bid Qty (cum.)</th>
+                    <th>Ask Qty (cum.)</th>
+                    <th>Net (Bid &minus; Ask)</th>
+                    <th>Total Qty (Bid+Ask)</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row">
+                    <td class="price">14.5</td>
+                    <td class="bid">33,150</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:1.8%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+33,150</span>
+                    </td>
+                    <td class="total-qty">33,150</td>
+                    <td class="time">2026-07-17 14:50:14</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.55</td>
+                    <td class="bid">6,890</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:0.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+6,890</span>
+                    </td>
+                    <td class="total-qty">6,890</td>
+                    <td class="time">2026-07-17 14:50:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.6</td>
+                    <td class="bid">46,020</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:2.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+46,020</span>
+                    </td>
+                    <td class="total-qty">46,020</td>
+                    <td class="time">2026-07-17 14:50:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.65</td>
+                    <td class="bid">30,940</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:1.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+30,940</span>
+                    </td>
+                    <td class="total-qty">30,940</td>
+                    <td class="time">2026-07-17 14:50:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.7</td>
+                    <td class="bid">29,445</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:1.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+29,445</span>
+                    </td>
+                    <td class="total-qty">29,445</td>
+                    <td class="time">2026-07-17 14:50:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.75</td>
+                    <td class="bid">26,260</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:1.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+26,260</span>
+                    </td>
+                    <td class="total-qty">26,260</td>
+                    <td class="time">2026-07-17 14:50:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.8</td>
+                    <td class="bid">106,275</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:5.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+106,275</span>
+                    </td>
+                    <td class="total-qty">106,275</td>
+                    <td class="time">2026-07-17 14:50:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.85</td>
+                    <td class="bid">46,215</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:2.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+46,215</span>
+                    </td>
+                    <td class="total-qty">46,215</td>
+                    <td class="time">2026-07-17 14:50:34</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">14.9</td>
+                    <td class="bid">229,320</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:12.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+229,320</span>
+                    </td>
+                    <td class="total-qty">229,320</td>
+                    <td class="time">2026-07-17 14:53:39</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">14.95</td>
+                    <td class="bid">314,015</td>
+                    <td class="ask">81,185</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:12.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+232,830</span>
+                    </td>
+                    <td class="total-qty">395,200</td>
+                    <td class="time">2026-07-17 14:51:27</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">15.0</td>
+                    <td class="bid">894,400</td>
+                    <td class="ask">26,650</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:48.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+867,750</span>
+                    </td>
+                    <td class="total-qty">921,050</td>
+                    <td class="time">2026-07-17 14:53:37</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">15.05</td>
+                    <td class="bid">388,570</td>
+                    <td class="ask">55,510</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:18.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+333,060</span>
+                    </td>
+                    <td class="total-qty">444,080</td>
+                    <td class="time">2026-07-17 14:53:36</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.1</td>
+                    <td class="bid">398,775</td>
+                    <td class="ask">108,420</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:16.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+290,355</span>
+                    </td>
+                    <td class="total-qty">507,195</td>
+                    <td class="time">2026-07-17 14:53:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.15</td>
+                    <td class="bid">107,120</td>
+                    <td class="ask">46,410</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:3.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+60,710</span>
+                    </td>
+                    <td class="total-qty">153,530</td>
+                    <td class="time">2026-07-17 14:53:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.2</td>
+                    <td class="bid">162,370</td>
+                    <td class="ask">38,740</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:6.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+123,630</span>
+                    </td>
+                    <td class="total-qty">201,110</td>
+                    <td class="time">2026-07-17 14:53:19</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.25</td>
+                    <td class="bid">101,465</td>
+                    <td class="ask">86,970</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:0.8%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+14,495</span>
+                    </td>
+                    <td class="total-qty">188,435</td>
+                    <td class="time">2026-07-17 14:52:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.3</td>
+                    <td class="bid">323,830</td>
+                    <td class="ask">197,275</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:7.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+126,555</span>
+                    </td>
+                    <td class="total-qty">521,105</td>
+                    <td class="time">2026-07-17 14:52:31</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">15.35</td>
+                    <td class="bid">229,320</td>
+                    <td class="ask">244,790</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:0.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-15,470</span>
+                    </td>
+                    <td class="total-qty">474,110</td>
+                    <td class="time">2026-07-17 14:53:39</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.4</td>
+                    <td class="bid">484,835</td>
+                    <td class="ask">528,645</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:2.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-43,810</span>
+                    </td>
+                    <td class="total-qty">1,013,480</td>
+                    <td class="time">2026-07-17 14:52:57</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">15.45</td>
+                    <td class="bid">300,755</td>
+                    <td class="ask">612,170</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:17.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-311,415</span>
+                    </td>
+                    <td class="total-qty">912,925</td>
+                    <td class="time">2026-07-17 14:53:33</td>
+                </tr>
+                <tr class="row fresh">
+                    <td class="price">15.5</td>
+                    <td class="bid">68,705</td>
+                    <td class="ask">486,460</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:23.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-417,755</span>
+                    </td>
+                    <td class="total-qty">555,165</td>
+                    <td class="time">2026-07-17 14:53:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.55</td>
+                    <td class="bid">0</td>
+                    <td class="ask">324,675</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:18.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-324,675</span>
+                    </td>
+                    <td class="total-qty">324,675</td>
+                    <td class="time">2026-07-17 14:53:26</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.6</td>
+                    <td class="bid">14,430</td>
+                    <td class="ask">261,755</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:13.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-247,325</span>
+                    </td>
+                    <td class="total-qty">276,185</td>
+                    <td class="time">2026-07-17 14:53:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.65</td>
+                    <td class="bid">2,730</td>
+                    <td class="ask">311,675</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:17.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-308,945</span>
+                    </td>
+                    <td class="total-qty">314,405</td>
+                    <td class="time">2026-07-17 14:53:19</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">417,885</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:23.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-417,885</span>
+                    </td>
+                    <td class="total-qty">417,885</td>
+                    <td class="time">2026-07-17 14:52:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.75</td>
+                    <td class="bid">3,510</td>
+                    <td class="ask">293,670</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:16.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-290,160</span>
+                    </td>
+                    <td class="total-qty">297,180</td>
+                    <td class="time">2026-07-17 14:52:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.8</td>
+                    <td class="bid">22,360</td>
+                    <td class="ask">464,555</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:24.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-442,195</span>
+                    </td>
+                    <td class="total-qty">486,915</td>
+                    <td class="time">2026-07-17 14:52:52</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.85</td>
+                    <td class="bid">119,600</td>
+                    <td class="ask">526,305</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:22.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-406,705</span>
+                    </td>
+                    <td class="total-qty">645,905</td>
+                    <td class="time">2026-07-17 14:52:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.9</td>
+                    <td class="bid">95,225</td>
+                    <td class="ask">343,200</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:13.8%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-247,975</span>
+                    </td>
+                    <td class="total-qty">438,425</td>
+                    <td class="time">2026-07-17 14:53:06</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">15.95</td>
+                    <td class="bid">480,415</td>
+                    <td class="ask">173,615</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:17.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+306,800</span>
+                    </td>
+                    <td class="total-qty">654,030</td>
+                    <td class="time">2026-07-17 14:53:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.0</td>
+                    <td class="bid">394,615</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:21.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+394,615</span>
+                    </td>
+                    <td class="total-qty">394,615</td>
+                    <td class="time">2026-07-17 14:48:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.05</td>
+                    <td class="bid">466,505</td>
+                    <td class="ask">66,300</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:22.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+400,205</span>
+                    </td>
+                    <td class="total-qty">532,805</td>
+                    <td class="time">2026-07-17 14:48:52</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.1</td>
+                    <td class="bid">378,625</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:21.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+378,625</span>
+                    </td>
+                    <td class="total-qty">378,625</td>
+                    <td class="time">2026-07-17 14:48:36</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.15</td>
+                    <td class="bid">258,960</td>
+                    <td class="ask">39,000</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:12.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+219,960</span>
+                    </td>
+                    <td class="total-qty">297,960</td>
+                    <td class="time">2026-07-17 14:48:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.2</td>
+                    <td class="bid">219,180</td>
+                    <td class="ask">44,200</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:9.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+174,980</span>
+                    </td>
+                    <td class="total-qty">263,380</td>
+                    <td class="time">2026-07-17 14:48:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.25</td>
+                    <td class="bid">111,020</td>
+                    <td class="ask">30,420</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:4.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+80,600</span>
+                    </td>
+                    <td class="total-qty">141,440</td>
+                    <td class="time">2026-07-17 14:48:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.3</td>
+                    <td class="bid">205,790</td>
+                    <td class="ask">239,785</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-33,995</span>
+                    </td>
+                    <td class="total-qty">445,575</td>
+                    <td class="time">2026-07-17 14:48:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.35</td>
+                    <td class="bid">885,950</td>
+                    <td class="ask">606,515</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:15.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+279,435</span>
+                    </td>
+                    <td class="total-qty">1,492,465</td>
+                    <td class="time">2026-07-17 14:48:46</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.4</td>
+                    <td class="bid">314,275</td>
+                    <td class="ask">411,645</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-97,370</span>
+                    </td>
+                    <td class="total-qty">725,920</td>
+                    <td class="time">2026-07-17 14:48:03</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.45</td>
+                    <td class="bid">250,120</td>
+                    <td class="ask">707,720</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:25.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-457,600</span>
+                    </td>
+                    <td class="total-qty">957,840</td>
+                    <td class="time">2026-07-17 14:48:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.5</td>
+                    <td class="bid">163,215</td>
+                    <td class="ask">454,675</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:16.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-291,460</span>
+                    </td>
+                    <td class="total-qty">617,890</td>
+                    <td class="time">2026-07-17 14:48:43</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.55</td>
+                    <td class="bid">68,965</td>
+                    <td class="ask">395,590</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:18.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-326,625</span>
+                    </td>
+                    <td class="total-qty">464,555</td>
+                    <td class="time">2026-07-17 14:48:36</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.6</td>
+                    <td class="bid">86,125</td>
+                    <td class="ask">175,890</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-89,765</span>
+                    </td>
+                    <td class="total-qty">262,015</td>
+                    <td class="time">2026-07-17 14:48:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.65</td>
+                    <td class="bid">161,460</td>
+                    <td class="ask">258,830</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-97,370</span>
+                    </td>
+                    <td class="total-qty">420,290</td>
+                    <td class="time">2026-07-17 14:48:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.7</td>
+                    <td class="bid">123,500</td>
+                    <td class="ask">464,100</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:18.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-340,600</span>
+                    </td>
+                    <td class="total-qty">587,600</td>
+                    <td class="time">2026-07-17 14:48:33</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.75</td>
+                    <td class="bid">61,100</td>
+                    <td class="ask">299,455</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:13.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-238,355</span>
+                    </td>
+                    <td class="total-qty">360,555</td>
+                    <td class="time">2026-07-17 14:48:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.8</td>
+                    <td class="bid">250,835</td>
+                    <td class="ask">759,590</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:28.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-508,755</span>
+                    </td>
+                    <td class="total-qty">1,010,425</td>
+                    <td class="time">2026-07-17 14:46:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.85</td>
+                    <td class="bid">68,250</td>
+                    <td class="ask">434,330</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:20.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-366,080</span>
+                    </td>
+                    <td class="total-qty">502,580</td>
+                    <td class="time">2026-07-17 14:46:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.9</td>
+                    <td class="bid">42,250</td>
+                    <td class="ask">278,460</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:13.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-236,210</span>
+                    </td>
+                    <td class="total-qty">320,710</td>
+                    <td class="time">2026-07-17 14:46:13</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">16.95</td>
+                    <td class="bid">9,165</td>
+                    <td class="ask">133,185</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:6.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-124,020</span>
+                    </td>
+                    <td class="total-qty">142,350</td>
+                    <td class="time">2026-07-17 14:46:18</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">187,785</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:10.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-187,785</span>
+                    </td>
+                    <td class="total-qty">187,785</td>
+                    <td class="time">2026-07-17 14:46:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.05</td>
+                    <td class="bid">7,930</td>
+                    <td class="ask">344,825</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:18.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-336,895</span>
+                    </td>
+                    <td class="total-qty">352,755</td>
+                    <td class="time">2026-07-17 14:46:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.1</td>
+                    <td class="bid">33,150</td>
+                    <td class="ask">431,340</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:22.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-398,190</span>
+                    </td>
+                    <td class="total-qty">464,490</td>
+                    <td class="time">2026-07-17 14:44:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.15</td>
+                    <td class="bid">61,490</td>
+                    <td class="ask">490,295</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:23.8%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-428,805</span>
+                    </td>
+                    <td class="total-qty">551,785</td>
+                    <td class="time">2026-07-17 14:44:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.2</td>
+                    <td class="bid">196,105</td>
+                    <td class="ask">567,580</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:20.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-371,475</span>
+                    </td>
+                    <td class="total-qty">763,685</td>
+                    <td class="time">2026-07-17 14:43:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.25</td>
+                    <td class="bid">1,988,740</td>
+                    <td class="ask">188,435</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:100.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+1,800,305</span>
+                    </td>
+                    <td class="total-qty">2,177,175</td>
+                    <td class="time">2026-07-17 14:44:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.3</td>
+                    <td class="bid">198,380</td>
+                    <td class="ask">146,705</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:2.9%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+51,675</span>
+                    </td>
+                    <td class="total-qty">345,085</td>
+                    <td class="time">2026-07-17 14:43:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.35</td>
+                    <td class="bid">80,275</td>
+                    <td class="ask">105,690</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-25,415</span>
+                    </td>
+                    <td class="total-qty">185,965</td>
+                    <td class="time">2026-07-17 14:43:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.4</td>
+                    <td class="bid">123,760</td>
+                    <td class="ask">31,200</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:5.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+92,560</span>
+                    </td>
+                    <td class="total-qty">154,960</td>
+                    <td class="time">2026-07-17 14:42:59</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.45</td>
+                    <td class="bid">335,400</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:18.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+335,400</span>
+                    </td>
+                    <td class="total-qty">335,400</td>
+                    <td class="time">2026-07-17 14:41:33</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.5</td>
+                    <td class="bid">845,780</td>
+                    <td class="ask">0</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:47.0%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+845,780</span>
+                    </td>
+                    <td class="total-qty">845,780</td>
+                    <td class="time">2026-07-17 14:41:17</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.55</td>
+                    <td class="bid">379,210</td>
+                    <td class="ask">85,670</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:16.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+293,540</span>
+                    </td>
+                    <td class="total-qty">464,880</td>
+                    <td class="time">2026-07-17 14:42:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.6</td>
+                    <td class="bid">501,670</td>
+                    <td class="ask">189,995</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-buy" style="width:17.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-positive">+311,675</span>
+                    </td>
+                    <td class="total-qty">691,665</td>
+                    <td class="time">2026-07-17 14:42:54</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.65</td>
+                    <td class="bid">121,810</td>
+                    <td class="ask">203,385</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:4.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-81,575</span>
+                    </td>
+                    <td class="total-qty">325,195</td>
+                    <td class="time">2026-07-17 14:42:42</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.7</td>
+                    <td class="bid">73,775</td>
+                    <td class="ask">400,400</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:18.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-326,625</span>
+                    </td>
+                    <td class="total-qty">474,175</td>
+                    <td class="time">2026-07-17 14:42:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.75</td>
+                    <td class="bid">28,665</td>
+                    <td class="ask">330,135</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:16.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-301,470</span>
+                    </td>
+                    <td class="total-qty">358,800</td>
+                    <td class="time">2026-07-17 14:42:29</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">91,780</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-91,780</span>
+                    </td>
+                    <td class="total-qty">91,780</td>
+                    <td class="time">2026-07-17 14:42:24</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.85</td>
+                    <td class="bid">39,910</td>
+                    <td class="ask">206,440</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:9.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-166,530</span>
+                    </td>
+                    <td class="total-qty">246,350</td>
+                    <td class="time">2026-07-17 14:41:36</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.9</td>
+                    <td class="bid">12,350</td>
+                    <td class="ask">268,060</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:14.2%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-255,710</span>
+                    </td>
+                    <td class="total-qty">280,410</td>
+                    <td class="time">2026-07-17 14:41:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">17.95</td>
+                    <td class="bid">57,330</td>
+                    <td class="ask">293,930</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:13.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-236,600</span>
+                    </td>
+                    <td class="total-qty">351,260</td>
+                    <td class="time">2026-07-17 14:41:18</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.0</td>
+                    <td class="bid">13,000</td>
+                    <td class="ask">518,895</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:28.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-505,895</span>
+                    </td>
+                    <td class="total-qty">531,895</td>
+                    <td class="time">2026-07-17 14:41:17</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.05</td>
+                    <td class="bid">72,670</td>
+                    <td class="ask">170,820</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.5%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-98,150</span>
+                    </td>
+                    <td class="total-qty">243,490</td>
+                    <td class="time">2026-07-17 14:41:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.1</td>
+                    <td class="bid">28,600</td>
+                    <td class="ask">69,485</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:2.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-40,885</span>
+                    </td>
+                    <td class="total-qty">98,085</td>
+                    <td class="time">2026-07-17 14:41:15</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.15</td>
+                    <td class="bid">32,760</td>
+                    <td class="ask">99,905</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:3.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-67,145</span>
+                    </td>
+                    <td class="total-qty">132,665</td>
+                    <td class="time">2026-07-17 14:41:14</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">25,285</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.4%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-25,285</span>
+                    </td>
+                    <td class="total-qty">25,285</td>
+                    <td class="time">2026-07-17 14:38:32</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.25</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,210</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:0.1%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-2,210</span>
+                    </td>
+                    <td class="total-qty">2,210</td>
+                    <td class="time">2026-07-17 14:37:56</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">23,075</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-23,075</span>
+                    </td>
+                    <td class="total-qty">23,075</td>
+                    <td class="time">2026-07-17 14:38:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.35</td>
+                    <td class="bid">0</td>
+                    <td class="ask">10,400</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:0.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-10,400</span>
+                    </td>
+                    <td class="total-qty">10,400</td>
+                    <td class="time">2026-07-17 14:37:59</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">13,260</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:0.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-13,260</span>
+                    </td>
+                    <td class="total-qty">13,260</td>
+                    <td class="time">2026-07-17 14:38:19</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.45</td>
+                    <td class="bid">0</td>
+                    <td class="ask">28,405</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.6%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-28,405</span>
+                    </td>
+                    <td class="total-qty">28,405</td>
+                    <td class="time">2026-07-17 14:38:17</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">102,115</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:5.7%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-102,115</span>
+                    </td>
+                    <td class="total-qty">102,115</td>
+                    <td class="time">2026-07-17 14:38:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.55</td>
+                    <td class="bid">0</td>
+                    <td class="ask">40,690</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:2.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-40,690</span>
+                    </td>
+                    <td class="total-qty">40,690</td>
+                    <td class="time">2026-07-17 14:38:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">18.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">22,620</td>
+                    <td class="net-cell">
+                        <div class="imbalance-track">
+                            <span class="imbalance-fill bar-sell" style="width:1.3%"></span>
+                            <span class="imbalance-mid"></span>
+                        </div>
+                        <span class="net-negative">-22,620</span>
+                    </td>
+                    <td class="total-qty">22,620</td>
+                    <td class="time">2026-07-17 14:38:14</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>Generated by PriceBookWriter &middot; 2026-07-17 14:53:39</footer>
+</div>
+</body>
+</html>

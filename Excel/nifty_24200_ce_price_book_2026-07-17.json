@@ -1,0 +1,2886 @@
+{
+  "title": "NIFTY 24200 CE (21-Jul)",
+  "generated_at": "2026-07-17 14:53:39",
+  "rows": [
+    {
+      "price": 159.65,
+      "bid_qty": 910,
+      "ask_qty": 0,
+      "net": 910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:38:12"
+    },
+    {
+      "price": 159.7,
+      "bid_qty": 1690,
+      "ask_qty": 0,
+      "net": 1690,
+      "total_qty": 1690,
+      "last_updated": "2026-07-17 14:38:13"
+    },
+    {
+      "price": 160.0,
+      "bid_qty": 3380,
+      "ask_qty": 0,
+      "net": 3380,
+      "total_qty": 3380,
+      "last_updated": "2026-07-17 14:38:15"
+    },
+    {
+      "price": 160.05,
+      "bid_qty": 1430,
+      "ask_qty": 0,
+      "net": 1430,
+      "total_qty": 1430,
+      "last_updated": "2026-07-17 14:38:10"
+    },
+    {
+      "price": 160.45,
+      "bid_qty": 0,
+      "ask_qty": 1820,
+      "net": -1820,
+      "total_qty": 1820,
+      "last_updated": "2026-07-17 14:38:12"
+    },
+    {
+      "price": 160.5,
+      "bid_qty": 0,
+      "ask_qty": 2080,
+      "net": -2080,
+      "total_qty": 2080,
+      "last_updated": "2026-07-17 14:38:13"
+    },
+    {
+      "price": 160.55,
+      "bid_qty": 520,
+      "ask_qty": 0,
+      "net": 520,
+      "total_qty": 520,
+      "last_updated": "2026-07-17 14:38:08"
+    },
+    {
+      "price": 160.75,
+      "bid_qty": 1560,
+      "ask_qty": 0,
+      "net": 1560,
+      "total_qty": 1560,
+      "last_updated": "2026-07-17 14:38:16"
+    },
+    {
+      "price": 160.8,
+      "bid_qty": 2145,
+      "ask_qty": 2210,
+      "net": -65,
+      "total_qty": 4355,
+      "last_updated": "2026-07-17 14:38:10"
+    },
+    {
+      "price": 160.85,
+      "bid_qty": 0,
+      "ask_qty": 1430,
+      "net": -1430,
+      "total_qty": 1430,
+      "last_updated": "2026-07-17 14:38:15"
+    },
+    {
+      "price": 161.2,
+      "bid_qty": 3120,
+      "ask_qty": 0,
+      "net": 3120,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:38:07"
+    },
+    {
+      "price": 161.3,
+      "bid_qty": 0,
+      "ask_qty": 2730,
+      "net": -2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:38:08"
+    },
+    {
+      "price": 161.35,
+      "bid_qty": 1300,
+      "ask_qty": 0,
+      "net": 1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:38:05"
+    },
+    {
+      "price": 161.6,
+      "bid_qty": 0,
+      "ask_qty": 1300,
+      "net": -1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:38:16"
+    },
+    {
+      "price": 161.65,
+      "bid_qty": 0,
+      "ask_qty": 910,
+      "net": -910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:38:02"
+    },
+    {
+      "price": 161.8,
+      "bid_qty": 2600,
+      "ask_qty": 0,
+      "net": 2600,
+      "total_qty": 2600,
+      "last_updated": "2026-07-17 14:38:18"
+    },
+    {
+      "price": 162.0,
+      "bid_qty": 0,
+      "ask_qty": 2535,
+      "net": -2535,
+      "total_qty": 2535,
+      "last_updated": "2026-07-17 14:38:07"
+    },
+    {
+      "price": 162.05,
+      "bid_qty": 2340,
+      "ask_qty": 0,
+      "net": 2340,
+      "total_qty": 2340,
+      "last_updated": "2026-07-17 14:38:02"
+    },
+    {
+      "price": 162.15,
+      "bid_qty": 0,
+      "ask_qty": 780,
+      "net": -780,
+      "total_qty": 780,
+      "last_updated": "2026-07-17 14:38:05"
+    },
+    {
+      "price": 162.25,
+      "bid_qty": 2080,
+      "ask_qty": 0,
+      "net": 2080,
+      "total_qty": 2080,
+      "last_updated": "2026-07-17 14:38:20"
+    },
+    {
+      "price": 162.55,
+      "bid_qty": 585,
+      "ask_qty": 0,
+      "net": 585,
+      "total_qty": 585,
+      "last_updated": "2026-07-17 14:38:00"
+    },
+    {
+      "price": 162.6,
+      "bid_qty": 0,
+      "ask_qty": 2210,
+      "net": -2210,
+      "total_qty": 2210,
+      "last_updated": "2026-07-17 14:38:18"
+    },
+    {
+      "price": 162.85,
+      "bid_qty": 0,
+      "ask_qty": 1365,
+      "net": -1365,
+      "total_qty": 1365,
+      "last_updated": "2026-07-17 14:38:02"
+    },
+    {
+      "price": 162.9,
+      "bid_qty": 0,
+      "ask_qty": 520,
+      "net": -520,
+      "total_qty": 520,
+      "last_updated": "2026-07-17 14:38:20"
+    },
+    {
+      "price": 163.1,
+      "bid_qty": 650,
+      "ask_qty": 0,
+      "net": 650,
+      "total_qty": 650,
+      "last_updated": "2026-07-17 14:37:58"
+    },
+    {
+      "price": 163.3,
+      "bid_qty": 2340,
+      "ask_qty": 0,
+      "net": 2340,
+      "total_qty": 2340,
+      "last_updated": "2026-07-17 14:38:22"
+    },
+    {
+      "price": 163.35,
+      "bid_qty": 3120,
+      "ask_qty": 0,
+      "net": 3120,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:39:40"
+    },
+    {
+      "price": 163.4,
+      "bid_qty": 0,
+      "ask_qty": 5070,
+      "net": -5070,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:38:00"
+    },
+    {
+      "price": 163.65,
+      "bid_qty": 0,
+      "ask_qty": 2210,
+      "net": -2210,
+      "total_qty": 2210,
+      "last_updated": "2026-07-17 14:37:58"
+    },
+    {
+      "price": 163.75,
+      "bid_qty": 4095,
+      "ask_qty": 0,
+      "net": 4095,
+      "total_qty": 4095,
+      "last_updated": "2026-07-17 14:39:38"
+    },
+    {
+      "price": 163.85,
+      "bid_qty": 1300,
+      "ask_qty": 0,
+      "net": 1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:37:57"
+    },
+    {
+      "price": 163.95,
+      "bid_qty": 910,
+      "ask_qty": 0,
+      "net": 910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:39:33"
+    },
+    {
+      "price": 164.05,
+      "bid_qty": 1690,
+      "ask_qty": 0,
+      "net": 1690,
+      "total_qty": 1690,
+      "last_updated": "2026-07-17 14:38:23"
+    },
+    {
+      "price": 164.1,
+      "bid_qty": 4940,
+      "ask_qty": 2340,
+      "net": 2600,
+      "total_qty": 7280,
+      "last_updated": "2026-07-17 14:39:42"
+    },
+    {
+      "price": 164.15,
+      "bid_qty": 0,
+      "ask_qty": 1300,
+      "net": -1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:39:40"
+    },
+    {
+      "price": 164.2,
+      "bid_qty": 2080,
+      "ask_qty": 0,
+      "net": 2080,
+      "total_qty": 2080,
+      "last_updated": "2026-07-17 14:38:31"
+    },
+    {
+      "price": 164.25,
+      "bid_qty": 3250,
+      "ask_qty": 0,
+      "net": 3250,
+      "total_qty": 3250,
+      "last_updated": "2026-07-17 14:38:25"
+    },
+    {
+      "price": 164.45,
+      "bid_qty": 1690,
+      "ask_qty": 0,
+      "net": 1690,
+      "total_qty": 1690,
+      "last_updated": "2026-07-17 14:39:45"
+    },
+    {
+      "price": 164.5,
+      "bid_qty": 15600,
+      "ask_qty": 0,
+      "net": 15600,
+      "total_qty": 15600,
+      "last_updated": "2026-07-17 14:39:43"
+    },
+    {
+      "price": 164.55,
+      "bid_qty": 3315,
+      "ask_qty": 5915,
+      "net": -2600,
+      "total_qty": 9230,
+      "last_updated": "2026-07-17 14:39:38"
+    },
+    {
+      "price": 164.6,
+      "bid_qty": 10010,
+      "ask_qty": 0,
+      "net": 10010,
+      "total_qty": 10010,
+      "last_updated": "2026-07-17 14:39:54"
+    },
+    {
+      "price": 164.65,
+      "bid_qty": 3380,
+      "ask_qty": 2340,
+      "net": 1040,
+      "total_qty": 5720,
+      "last_updated": "2026-07-17 14:39:46"
+    },
+    {
+      "price": 164.7,
+      "bid_qty": 1820,
+      "ask_qty": 1820,
+      "net": 0,
+      "total_qty": 3640,
+      "last_updated": "2026-07-17 14:39:33"
+    },
+    {
+      "price": 164.75,
+      "bid_qty": 3900,
+      "ask_qty": 0,
+      "net": 3900,
+      "total_qty": 3900,
+      "last_updated": "2026-07-17 14:38:30"
+    },
+    {
+      "price": 164.8,
+      "bid_qty": 3380,
+      "ask_qty": 2990,
+      "net": 390,
+      "total_qty": 6370,
+      "last_updated": "2026-07-17 14:39:24"
+    },
+    {
+      "price": 164.85,
+      "bid_qty": 7020,
+      "ask_qty": 0,
+      "net": 7020,
+      "total_qty": 7020,
+      "last_updated": "2026-07-17 14:39:48"
+    },
+    {
+      "price": 164.9,
+      "bid_qty": 3900,
+      "ask_qty": 5005,
+      "net": -1105,
+      "total_qty": 8905,
+      "last_updated": "2026-07-17 14:39:42"
+    },
+    {
+      "price": 165.0,
+      "bid_qty": 7930,
+      "ask_qty": 13910,
+      "net": -5980,
+      "total_qty": 21840,
+      "last_updated": "2026-07-17 14:39:50"
+    },
+    {
+      "price": 165.15,
+      "bid_qty": 0,
+      "ask_qty": 650,
+      "net": -650,
+      "total_qty": 650,
+      "last_updated": "2026-07-17 14:38:33"
+    },
+    {
+      "price": 165.2,
+      "bid_qty": 6630,
+      "ask_qty": 0,
+      "net": 6630,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:39:21"
+    },
+    {
+      "price": 165.25,
+      "bid_qty": 3120,
+      "ask_qty": 8580,
+      "net": -5460,
+      "total_qty": 11700,
+      "last_updated": "2026-07-17 14:39:58"
+    },
+    {
+      "price": 165.3,
+      "bid_qty": 0,
+      "ask_qty": 7150,
+      "net": -7150,
+      "total_qty": 7150,
+      "last_updated": "2026-07-17 14:39:26"
+    },
+    {
+      "price": 165.35,
+      "bid_qty": 7085,
+      "ask_qty": 1755,
+      "net": 5330,
+      "total_qty": 8840,
+      "last_updated": "2026-07-17 14:41:05"
+    },
+    {
+      "price": 165.4,
+      "bid_qty": 15730,
+      "ask_qty": 5590,
+      "net": 10140,
+      "total_qty": 21320,
+      "last_updated": "2026-07-17 14:39:46"
+    },
+    {
+      "price": 165.45,
+      "bid_qty": 3900,
+      "ask_qty": 3250,
+      "net": 650,
+      "total_qty": 7150,
+      "last_updated": "2026-07-17 14:39:03"
+    },
+    {
+      "price": 165.5,
+      "bid_qty": 9035,
+      "ask_qty": 2470,
+      "net": 6565,
+      "total_qty": 11505,
+      "last_updated": "2026-07-17 14:39:08"
+    },
+    {
+      "price": 165.55,
+      "bid_qty": 5330,
+      "ask_qty": 2730,
+      "net": 2600,
+      "total_qty": 8060,
+      "last_updated": "2026-07-17 14:39:59"
+    },
+    {
+      "price": 165.6,
+      "bid_qty": 9100,
+      "ask_qty": 0,
+      "net": 9100,
+      "total_qty": 9100,
+      "last_updated": "2026-07-17 14:39:53"
+    },
+    {
+      "price": 165.65,
+      "bid_qty": 1950,
+      "ask_qty": 2470,
+      "net": -520,
+      "total_qty": 4420,
+      "last_updated": "2026-07-17 14:39:32"
+    },
+    {
+      "price": 165.7,
+      "bid_qty": 0,
+      "ask_qty": 4485,
+      "net": -4485,
+      "total_qty": 4485,
+      "last_updated": "2026-07-17 14:39:48"
+    },
+    {
+      "price": 165.75,
+      "bid_qty": 780,
+      "ask_qty": 7800,
+      "net": -7020,
+      "total_qty": 8580,
+      "last_updated": "2026-07-17 14:39:50"
+    },
+    {
+      "price": 165.8,
+      "bid_qty": 2600,
+      "ask_qty": 2600,
+      "net": 0,
+      "total_qty": 5200,
+      "last_updated": "2026-07-17 14:39:16"
+    },
+    {
+      "price": 165.9,
+      "bid_qty": 0,
+      "ask_qty": 3510,
+      "net": -3510,
+      "total_qty": 3510,
+      "last_updated": "2026-07-17 14:39:21"
+    },
+    {
+      "price": 166.0,
+      "bid_qty": 6240,
+      "ask_qty": 20150,
+      "net": -13910,
+      "total_qty": 26390,
+      "last_updated": "2026-07-17 14:39:05"
+    },
+    {
+      "price": 166.05,
+      "bid_qty": 0,
+      "ask_qty": 5655,
+      "net": -5655,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:39:58"
+    },
+    {
+      "price": 166.1,
+      "bid_qty": 5200,
+      "ask_qty": 0,
+      "net": 5200,
+      "total_qty": 5200,
+      "last_updated": "2026-07-17 14:41:13"
+    },
+    {
+      "price": 166.15,
+      "bid_qty": 2080,
+      "ask_qty": 1040,
+      "net": 1040,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:39:06"
+    },
+    {
+      "price": 166.2,
+      "bid_qty": 1560,
+      "ask_qty": 23010,
+      "net": -21450,
+      "total_qty": 24570,
+      "last_updated": "2026-07-17 14:41:05"
+    },
+    {
+      "price": 166.25,
+      "bid_qty": 4420,
+      "ask_qty": 12610,
+      "net": -8190,
+      "total_qty": 17030,
+      "last_updated": "2026-07-17 14:41:14"
+    },
+    {
+      "price": 166.3,
+      "bid_qty": 0,
+      "ask_qty": 6175,
+      "net": -6175,
+      "total_qty": 6175,
+      "last_updated": "2026-07-17 14:39:08"
+    },
+    {
+      "price": 166.35,
+      "bid_qty": 1430,
+      "ask_qty": 4160,
+      "net": -2730,
+      "total_qty": 5590,
+      "last_updated": "2026-07-17 14:40:53"
+    },
+    {
+      "price": 166.4,
+      "bid_qty": 12285,
+      "ask_qty": 4420,
+      "net": 7865,
+      "total_qty": 16705,
+      "last_updated": "2026-07-17 14:41:08"
+    },
+    {
+      "price": 166.45,
+      "bid_qty": 2080,
+      "ask_qty": 1430,
+      "net": 650,
+      "total_qty": 3510,
+      "last_updated": "2026-07-17 14:40:43"
+    },
+    {
+      "price": 166.5,
+      "bid_qty": 2470,
+      "ask_qty": 0,
+      "net": 2470,
+      "total_qty": 2470,
+      "last_updated": "2026-07-17 14:41:16"
+    },
+    {
+      "price": 166.6,
+      "bid_qty": 6175,
+      "ask_qty": 2860,
+      "net": 3315,
+      "total_qty": 9035,
+      "last_updated": "2026-07-17 14:41:10"
+    },
+    {
+      "price": 166.65,
+      "bid_qty": 2600,
+      "ask_qty": 0,
+      "net": 2600,
+      "total_qty": 2600,
+      "last_updated": "2026-07-17 14:41:11"
+    },
+    {
+      "price": 166.75,
+      "bid_qty": 4810,
+      "ask_qty": 0,
+      "net": 4810,
+      "total_qty": 4810,
+      "last_updated": "2026-07-17 14:41:02"
+    },
+    {
+      "price": 166.8,
+      "bid_qty": 0,
+      "ask_qty": 2535,
+      "net": -2535,
+      "total_qty": 2535,
+      "last_updated": "2026-07-17 14:39:05"
+    },
+    {
+      "price": 166.85,
+      "bid_qty": 1560,
+      "ask_qty": 1040,
+      "net": 520,
+      "total_qty": 2600,
+      "last_updated": "2026-07-17 14:40:59"
+    },
+    {
+      "price": 166.9,
+      "bid_qty": 0,
+      "ask_qty": 1300,
+      "net": -1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:41:13"
+    },
+    {
+      "price": 166.95,
+      "bid_qty": 2860,
+      "ask_qty": 1560,
+      "net": 1300,
+      "total_qty": 4420,
+      "last_updated": "2026-07-17 14:40:09"
+    },
+    {
+      "price": 167.0,
+      "bid_qty": 4550,
+      "ask_qty": 29185,
+      "net": -24635,
+      "total_qty": 33735,
+      "last_updated": "2026-07-17 14:41:14"
+    },
+    {
+      "price": 167.05,
+      "bid_qty": 2730,
+      "ask_qty": 0,
+      "net": 2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:40:11"
+    },
+    {
+      "price": 167.1,
+      "bid_qty": 3510,
+      "ask_qty": 1170,
+      "net": 2340,
+      "total_qty": 4680,
+      "last_updated": "2026-07-17 14:41:03"
+    },
+    {
+      "price": 167.15,
+      "bid_qty": 1560,
+      "ask_qty": 3120,
+      "net": -1560,
+      "total_qty": 4680,
+      "last_updated": "2026-07-17 14:41:06"
+    },
+    {
+      "price": 167.2,
+      "bid_qty": 10660,
+      "ask_qty": 3900,
+      "net": 6760,
+      "total_qty": 14560,
+      "last_updated": "2026-07-17 14:41:00"
+    },
+    {
+      "price": 167.25,
+      "bid_qty": 5980,
+      "ask_qty": 4745,
+      "net": 1235,
+      "total_qty": 10725,
+      "last_updated": "2026-07-17 14:41:08"
+    },
+    {
+      "price": 167.3,
+      "bid_qty": 3120,
+      "ask_qty": 13975,
+      "net": -10855,
+      "total_qty": 17095,
+      "last_updated": "2026-07-17 14:41:16"
+    },
+    {
+      "price": 167.35,
+      "bid_qty": 1950,
+      "ask_qty": 0,
+      "net": 1950,
+      "total_qty": 1950,
+      "last_updated": "2026-07-17 14:40:38"
+    },
+    {
+      "price": 167.4,
+      "bid_qty": 3640,
+      "ask_qty": 2730,
+      "net": 910,
+      "total_qty": 6370,
+      "last_updated": "2026-07-17 14:41:11"
+    },
+    {
+      "price": 167.45,
+      "bid_qty": 1040,
+      "ask_qty": 1950,
+      "net": -910,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:40:47"
+    },
+    {
+      "price": 167.5,
+      "bid_qty": 2860,
+      "ask_qty": 6630,
+      "net": -3770,
+      "total_qty": 9490,
+      "last_updated": "2026-07-17 14:41:02"
+    },
+    {
+      "price": 167.55,
+      "bid_qty": 1105,
+      "ask_qty": 4680,
+      "net": -3575,
+      "total_qty": 5785,
+      "last_updated": "2026-07-17 14:40:04"
+    },
+    {
+      "price": 167.65,
+      "bid_qty": 1040,
+      "ask_qty": 1820,
+      "net": -780,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:41:19"
+    },
+    {
+      "price": 167.7,
+      "bid_qty": 1690,
+      "ask_qty": 2080,
+      "net": -390,
+      "total_qty": 3770,
+      "last_updated": "2026-07-17 14:40:09"
+    },
+    {
+      "price": 167.75,
+      "bid_qty": 0,
+      "ask_qty": 3120,
+      "net": -3120,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:40:49"
+    },
+    {
+      "price": 167.8,
+      "bid_qty": 0,
+      "ask_qty": 2990,
+      "net": -2990,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:41:03"
+    },
+    {
+      "price": 167.85,
+      "bid_qty": 0,
+      "ask_qty": 2535,
+      "net": -2535,
+      "total_qty": 2535,
+      "last_updated": "2026-07-17 14:40:11"
+    },
+    {
+      "price": 167.95,
+      "bid_qty": 0,
+      "ask_qty": 1430,
+      "net": -1430,
+      "total_qty": 1430,
+      "last_updated": "2026-07-17 14:40:52"
+    },
+    {
+      "price": 168.0,
+      "bid_qty": 0,
+      "ask_qty": 20605,
+      "net": -20605,
+      "total_qty": 20605,
+      "last_updated": "2026-07-17 14:41:00"
+    },
+    {
+      "price": 168.05,
+      "bid_qty": 0,
+      "ask_qty": 2730,
+      "net": -2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:40:37"
+    },
+    {
+      "price": 168.1,
+      "bid_qty": 3315,
+      "ask_qty": 2340,
+      "net": 975,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:40:31"
+    },
+    {
+      "price": 168.15,
+      "bid_qty": 0,
+      "ask_qty": 1430,
+      "net": -1430,
+      "total_qty": 1430,
+      "last_updated": "2026-07-17 14:40:41"
+    },
+    {
+      "price": 168.2,
+      "bid_qty": 3900,
+      "ask_qty": 5590,
+      "net": -1690,
+      "total_qty": 9490,
+      "last_updated": "2026-07-17 14:41:20"
+    },
+    {
+      "price": 168.25,
+      "bid_qty": 0,
+      "ask_qty": 3380,
+      "net": -3380,
+      "total_qty": 3380,
+      "last_updated": "2026-07-17 14:40:12"
+    },
+    {
+      "price": 168.3,
+      "bid_qty": 0,
+      "ask_qty": 1235,
+      "net": -1235,
+      "total_qty": 1235,
+      "last_updated": "2026-07-17 14:38:40"
+    },
+    {
+      "price": 168.45,
+      "bid_qty": 1950,
+      "ask_qty": 0,
+      "net": 1950,
+      "total_qty": 1950,
+      "last_updated": "2026-07-17 14:40:14"
+    },
+    {
+      "price": 168.5,
+      "bid_qty": 9490,
+      "ask_qty": 5070,
+      "net": 4420,
+      "total_qty": 14560,
+      "last_updated": "2026-07-17 14:41:19"
+    },
+    {
+      "price": 168.6,
+      "bid_qty": 2990,
+      "ask_qty": 0,
+      "net": 2990,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:40:31"
+    },
+    {
+      "price": 168.7,
+      "bid_qty": 3510,
+      "ask_qty": 0,
+      "net": 3510,
+      "total_qty": 3510,
+      "last_updated": "2026-07-17 14:40:27"
+    },
+    {
+      "price": 168.8,
+      "bid_qty": 12740,
+      "ask_qty": 0,
+      "net": 12740,
+      "total_qty": 12740,
+      "last_updated": "2026-07-17 14:40:29"
+    },
+    {
+      "price": 168.9,
+      "bid_qty": 0,
+      "ask_qty": 10140,
+      "net": -10140,
+      "total_qty": 10140,
+      "last_updated": "2026-07-17 14:40:31"
+    },
+    {
+      "price": 169.0,
+      "bid_qty": 3120,
+      "ask_qty": 0,
+      "net": 3120,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:40:22"
+    },
+    {
+      "price": 169.1,
+      "bid_qty": 0,
+      "ask_qty": 2925,
+      "net": -2925,
+      "total_qty": 2925,
+      "last_updated": "2026-07-17 14:41:20"
+    },
+    {
+      "price": 169.25,
+      "bid_qty": 0,
+      "ask_qty": 2340,
+      "net": -2340,
+      "total_qty": 2340,
+      "last_updated": "2026-07-17 14:40:14"
+    },
+    {
+      "price": 169.3,
+      "bid_qty": 910,
+      "ask_qty": 5005,
+      "net": -4095,
+      "total_qty": 5915,
+      "last_updated": "2026-07-17 14:40:33"
+    },
+    {
+      "price": 169.35,
+      "bid_qty": 2080,
+      "ask_qty": 2990,
+      "net": -910,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:40:27"
+    },
+    {
+      "price": 169.4,
+      "bid_qty": 5395,
+      "ask_qty": 0,
+      "net": 5395,
+      "total_qty": 5395,
+      "last_updated": "2026-07-17 14:41:22"
+    },
+    {
+      "price": 169.45,
+      "bid_qty": 0,
+      "ask_qty": 1820,
+      "net": -1820,
+      "total_qty": 1820,
+      "last_updated": "2026-07-17 14:40:31"
+    },
+    {
+      "price": 169.6,
+      "bid_qty": 0,
+      "ask_qty": 2340,
+      "net": -2340,
+      "total_qty": 2340,
+      "last_updated": "2026-07-17 14:40:19"
+    },
+    {
+      "price": 169.7,
+      "bid_qty": 0,
+      "ask_qty": 1300,
+      "net": -1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:40:29"
+    },
+    {
+      "price": 169.75,
+      "bid_qty": 0,
+      "ask_qty": 910,
+      "net": -910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:40:22"
+    },
+    {
+      "price": 169.85,
+      "bid_qty": 1950,
+      "ask_qty": 0,
+      "net": 1950,
+      "total_qty": 1950,
+      "last_updated": "2026-07-17 14:41:23"
+    },
+    {
+      "price": 170.15,
+      "bid_qty": 1560,
+      "ask_qty": 1430,
+      "net": 130,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:41:25"
+    },
+    {
+      "price": 170.2,
+      "bid_qty": 0,
+      "ask_qty": 6565,
+      "net": -6565,
+      "total_qty": 6565,
+      "last_updated": "2026-07-17 14:41:22"
+    },
+    {
+      "price": 170.3,
+      "bid_qty": 520,
+      "ask_qty": 0,
+      "net": 520,
+      "total_qty": 520,
+      "last_updated": "2026-07-17 14:41:28"
+    },
+    {
+      "price": 170.6,
+      "bid_qty": 1690,
+      "ask_qty": 0,
+      "net": 1690,
+      "total_qty": 1690,
+      "last_updated": "2026-07-17 14:41:38"
+    },
+    {
+      "price": 170.7,
+      "bid_qty": 0,
+      "ask_qty": 2860,
+      "net": -2860,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:41:23"
+    },
+    {
+      "price": 170.8,
+      "bid_qty": 9620,
+      "ask_qty": 0,
+      "net": 9620,
+      "total_qty": 9620,
+      "last_updated": "2026-07-17 14:41:36"
+    },
+    {
+      "price": 170.9,
+      "bid_qty": 6240,
+      "ask_qty": 0,
+      "net": 6240,
+      "total_qty": 6240,
+      "last_updated": "2026-07-17 14:42:44"
+    },
+    {
+      "price": 170.95,
+      "bid_qty": 3510,
+      "ask_qty": 1560,
+      "net": 1950,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:41:35"
+    },
+    {
+      "price": 171.05,
+      "bid_qty": 1040,
+      "ask_qty": 0,
+      "net": 1040,
+      "total_qty": 1040,
+      "last_updated": "2026-07-17 14:42:51"
+    },
+    {
+      "price": 171.15,
+      "bid_qty": 2600,
+      "ask_qty": 2470,
+      "net": 130,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:41:33"
+    },
+    {
+      "price": 171.2,
+      "bid_qty": 2990,
+      "ask_qty": 0,
+      "net": 2990,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:42:50"
+    },
+    {
+      "price": 171.3,
+      "bid_qty": 6110,
+      "ask_qty": 0,
+      "net": 6110,
+      "total_qty": 6110,
+      "last_updated": "2026-07-17 14:42:19"
+    },
+    {
+      "price": 171.4,
+      "bid_qty": 0,
+      "ask_qty": 1170,
+      "net": -1170,
+      "total_qty": 1170,
+      "last_updated": "2026-07-17 14:41:38"
+    },
+    {
+      "price": 171.45,
+      "bid_qty": 2210,
+      "ask_qty": 0,
+      "net": 2210,
+      "total_qty": 2210,
+      "last_updated": "2026-07-17 14:42:42"
+    },
+    {
+      "price": 171.55,
+      "bid_qty": 5915,
+      "ask_qty": 2600,
+      "net": 3315,
+      "total_qty": 8515,
+      "last_updated": "2026-07-17 14:42:55"
+    },
+    {
+      "price": 171.6,
+      "bid_qty": 0,
+      "ask_qty": 2730,
+      "net": -2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:41:36"
+    },
+    {
+      "price": 171.65,
+      "bid_qty": 1365,
+      "ask_qty": 3120,
+      "net": -1755,
+      "total_qty": 4485,
+      "last_updated": "2026-07-17 14:42:51"
+    },
+    {
+      "price": 171.7,
+      "bid_qty": 0,
+      "ask_qty": 1820,
+      "net": -1820,
+      "total_qty": 1820,
+      "last_updated": "2026-07-17 14:42:17"
+    },
+    {
+      "price": 171.75,
+      "bid_qty": 0,
+      "ask_qty": 2600,
+      "net": -2600,
+      "total_qty": 2600,
+      "last_updated": "2026-07-17 14:42:44"
+    },
+    {
+      "price": 171.8,
+      "bid_qty": 5330,
+      "ask_qty": 3705,
+      "net": 1625,
+      "total_qty": 9035,
+      "last_updated": "2026-07-17 14:42:40"
+    },
+    {
+      "price": 171.85,
+      "bid_qty": 2470,
+      "ask_qty": 0,
+      "net": 2470,
+      "total_qty": 2470,
+      "last_updated": "2026-07-17 14:42:48"
+    },
+    {
+      "price": 172.0,
+      "bid_qty": 2210,
+      "ask_qty": 5330,
+      "net": -3120,
+      "total_qty": 7540,
+      "last_updated": "2026-07-17 14:42:39"
+    },
+    {
+      "price": 172.05,
+      "bid_qty": 0,
+      "ask_qty": 4030,
+      "net": -4030,
+      "total_qty": 4030,
+      "last_updated": "2026-07-17 14:42:50"
+    },
+    {
+      "price": 172.1,
+      "bid_qty": 0,
+      "ask_qty": 2860,
+      "net": -2860,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:42:24"
+    },
+    {
+      "price": 172.15,
+      "bid_qty": 0,
+      "ask_qty": 780,
+      "net": -780,
+      "total_qty": 780,
+      "last_updated": "2026-07-17 14:42:19"
+    },
+    {
+      "price": 172.2,
+      "bid_qty": 0,
+      "ask_qty": 3120,
+      "net": -3120,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:42:53"
+    },
+    {
+      "price": 172.25,
+      "bid_qty": 0,
+      "ask_qty": 4030,
+      "net": -4030,
+      "total_qty": 4030,
+      "last_updated": "2026-07-17 14:42:55"
+    },
+    {
+      "price": 172.3,
+      "bid_qty": 7930,
+      "ask_qty": 0,
+      "net": 7930,
+      "total_qty": 7930,
+      "last_updated": "2026-07-17 14:42:56"
+    },
+    {
+      "price": 172.35,
+      "bid_qty": 1560,
+      "ask_qty": 0,
+      "net": 1560,
+      "total_qty": 1560,
+      "last_updated": "2026-07-17 14:42:21"
+    },
+    {
+      "price": 172.4,
+      "bid_qty": 0,
+      "ask_qty": 2340,
+      "net": -2340,
+      "total_qty": 2340,
+      "last_updated": "2026-07-17 14:42:45"
+    },
+    {
+      "price": 172.5,
+      "bid_qty": 0,
+      "ask_qty": 9360,
+      "net": -9360,
+      "total_qty": 9360,
+      "last_updated": "2026-07-17 14:42:47"
+    },
+    {
+      "price": 172.55,
+      "bid_qty": 1170,
+      "ask_qty": 0,
+      "net": 1170,
+      "total_qty": 1170,
+      "last_updated": "2026-07-17 14:42:37"
+    },
+    {
+      "price": 172.6,
+      "bid_qty": 0,
+      "ask_qty": 2990,
+      "net": -2990,
+      "total_qty": 2990,
+      "last_updated": "2026-07-17 14:42:25"
+    },
+    {
+      "price": 172.65,
+      "bid_qty": 0,
+      "ask_qty": 4485,
+      "net": -4485,
+      "total_qty": 4485,
+      "last_updated": "2026-07-17 14:42:48"
+    },
+    {
+      "price": 172.75,
+      "bid_qty": 1820,
+      "ask_qty": 0,
+      "net": 1820,
+      "total_qty": 1820,
+      "last_updated": "2026-07-17 14:41:42"
+    },
+    {
+      "price": 172.8,
+      "bid_qty": 3380,
+      "ask_qty": 0,
+      "net": 3380,
+      "total_qty": 3380,
+      "last_updated": "2026-07-17 14:53:10"
+    },
+    {
+      "price": 172.85,
+      "bid_qty": 1170,
+      "ask_qty": 0,
+      "net": 1170,
+      "total_qty": 1170,
+      "last_updated": "2026-07-17 14:42:34"
+    },
+    {
+      "price": 172.9,
+      "bid_qty": 0,
+      "ask_qty": 1560,
+      "net": -1560,
+      "total_qty": 1560,
+      "last_updated": "2026-07-17 14:42:39"
+    },
+    {
+      "price": 172.95,
+      "bid_qty": 1365,
+      "ask_qty": 0,
+      "net": 1365,
+      "total_qty": 1365,
+      "last_updated": "2026-07-17 14:53:38"
+    },
+    {
+      "price": 173.0,
+      "bid_qty": 0,
+      "ask_qty": 23920,
+      "net": -23920,
+      "total_qty": 23920,
+      "last_updated": "2026-07-17 14:42:56"
+    },
+    {
+      "price": 173.05,
+      "bid_qty": 3510,
+      "ask_qty": 1040,
+      "net": 2470,
+      "total_qty": 4550,
+      "last_updated": "2026-07-17 14:53:20"
+    },
+    {
+      "price": 173.1,
+      "bid_qty": 6240,
+      "ask_qty": 0,
+      "net": 6240,
+      "total_qty": 6240,
+      "last_updated": "2026-07-17 14:42:30"
+    },
+    {
+      "price": 173.15,
+      "bid_qty": 910,
+      "ask_qty": 2210,
+      "net": -1300,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:53:35"
+    },
+    {
+      "price": 173.2,
+      "bid_qty": 9750,
+      "ask_qty": 6240,
+      "net": 3510,
+      "total_qty": 15990,
+      "last_updated": "2026-07-17 14:53:27"
+    },
+    {
+      "price": 173.25,
+      "bid_qty": 6955,
+      "ask_qty": 0,
+      "net": 6955,
+      "total_qty": 6955,
+      "last_updated": "2026-07-17 14:53:22"
+    },
+    {
+      "price": 173.35,
+      "bid_qty": 4680,
+      "ask_qty": 2860,
+      "net": 1820,
+      "total_qty": 7540,
+      "last_updated": "2026-07-17 14:53:28"
+    },
+    {
+      "price": 173.4,
+      "bid_qty": 6110,
+      "ask_qty": 0,
+      "net": 6110,
+      "total_qty": 6110,
+      "last_updated": "2026-07-17 14:53:30"
+    },
+    {
+      "price": 173.45,
+      "bid_qty": 3575,
+      "ask_qty": 0,
+      "net": 3575,
+      "total_qty": 3575,
+      "last_updated": "2026-07-17 14:53:37"
+    },
+    {
+      "price": 173.5,
+      "bid_qty": 8970,
+      "ask_qty": 0,
+      "net": 8970,
+      "total_qty": 8970,
+      "last_updated": "2026-07-17 14:53:24"
+    },
+    {
+      "price": 173.55,
+      "bid_qty": 2470,
+      "ask_qty": 0,
+      "net": 2470,
+      "total_qty": 2470,
+      "last_updated": "2026-07-17 14:41:48"
+    },
+    {
+      "price": 173.6,
+      "bid_qty": 11895,
+      "ask_qty": 4160,
+      "net": 7735,
+      "total_qty": 16055,
+      "last_updated": "2026-07-17 14:53:10"
+    },
+    {
+      "price": 173.65,
+      "bid_qty": 2080,
+      "ask_qty": 0,
+      "net": 2080,
+      "total_qty": 2080,
+      "last_updated": "2026-07-17 14:50:40"
+    },
+    {
+      "price": 173.7,
+      "bid_qty": 21970,
+      "ask_qty": 0,
+      "net": 21970,
+      "total_qty": 21970,
+      "last_updated": "2026-07-17 14:50:42"
+    },
+    {
+      "price": 173.75,
+      "bid_qty": 5720,
+      "ask_qty": 12805,
+      "net": -7085,
+      "total_qty": 18525,
+      "last_updated": "2026-07-17 14:53:38"
+    },
+    {
+      "price": 173.8,
+      "bid_qty": 6630,
+      "ask_qty": 0,
+      "net": 6630,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:53:17"
+    },
+    {
+      "price": 173.85,
+      "bid_qty": 4745,
+      "ask_qty": 3835,
+      "net": 910,
+      "total_qty": 8580,
+      "last_updated": "2026-07-17 14:53:19"
+    },
+    {
+      "price": 173.9,
+      "bid_qty": 2860,
+      "ask_qty": 0,
+      "net": 2860,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:43:54"
+    },
+    {
+      "price": 173.95,
+      "bid_qty": 650,
+      "ask_qty": 5850,
+      "net": -5200,
+      "total_qty": 6500,
+      "last_updated": "2026-07-17 14:53:33"
+    },
+    {
+      "price": 174.0,
+      "bid_qty": 11505,
+      "ask_qty": 3120,
+      "net": 8385,
+      "total_qty": 14625,
+      "last_updated": "2026-07-17 14:53:32"
+    },
+    {
+      "price": 174.1,
+      "bid_qty": 2210,
+      "ask_qty": 12870,
+      "net": -10660,
+      "total_qty": 15080,
+      "last_updated": "2026-07-17 14:53:35"
+    },
+    {
+      "price": 174.15,
+      "bid_qty": 5200,
+      "ask_qty": 3380,
+      "net": 1820,
+      "total_qty": 8580,
+      "last_updated": "2026-07-17 14:53:12"
+    },
+    {
+      "price": 174.2,
+      "bid_qty": 5460,
+      "ask_qty": 8515,
+      "net": -3055,
+      "total_qty": 13975,
+      "last_updated": "2026-07-17 14:53:37"
+    },
+    {
+      "price": 174.25,
+      "bid_qty": 5525,
+      "ask_qty": 7215,
+      "net": -1690,
+      "total_qty": 12740,
+      "last_updated": "2026-07-17 14:53:24"
+    },
+    {
+      "price": 174.3,
+      "bid_qty": 0,
+      "ask_qty": 1820,
+      "net": -1820,
+      "total_qty": 1820,
+      "last_updated": "2026-07-17 14:51:42"
+    },
+    {
+      "price": 174.35,
+      "bid_qty": 2340,
+      "ask_qty": 5980,
+      "net": -3640,
+      "total_qty": 8320,
+      "last_updated": "2026-07-17 14:51:40"
+    },
+    {
+      "price": 174.4,
+      "bid_qty": 0,
+      "ask_qty": 3900,
+      "net": -3900,
+      "total_qty": 3900,
+      "last_updated": "2026-07-17 14:50:40"
+    },
+    {
+      "price": 174.45,
+      "bid_qty": 3315,
+      "ask_qty": 4875,
+      "net": -1560,
+      "total_qty": 8190,
+      "last_updated": "2026-07-17 14:53:15"
+    },
+    {
+      "price": 174.5,
+      "bid_qty": 12220,
+      "ask_qty": 12480,
+      "net": -260,
+      "total_qty": 24700,
+      "last_updated": "2026-07-17 14:53:07"
+    },
+    {
+      "price": 174.55,
+      "bid_qty": 650,
+      "ask_qty": 4420,
+      "net": -3770,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:53:17"
+    },
+    {
+      "price": 174.6,
+      "bid_qty": 4810,
+      "ask_qty": 0,
+      "net": 4810,
+      "total_qty": 4810,
+      "last_updated": "2026-07-17 14:41:56"
+    },
+    {
+      "price": 174.65,
+      "bid_qty": 2470,
+      "ask_qty": 6565,
+      "net": -4095,
+      "total_qty": 9035,
+      "last_updated": "2026-07-17 14:53:33"
+    },
+    {
+      "price": 174.7,
+      "bid_qty": 9880,
+      "ask_qty": 6110,
+      "net": 3770,
+      "total_qty": 15990,
+      "last_updated": "2026-07-17 14:50:39"
+    },
+    {
+      "price": 174.75,
+      "bid_qty": 4420,
+      "ask_qty": 4680,
+      "net": -260,
+      "total_qty": 9100,
+      "last_updated": "2026-07-17 14:51:49"
+    },
+    {
+      "price": 174.8,
+      "bid_qty": 10400,
+      "ask_qty": 2145,
+      "net": 8255,
+      "total_qty": 12545,
+      "last_updated": "2026-07-17 14:53:32"
+    },
+    {
+      "price": 174.85,
+      "bid_qty": 8710,
+      "ask_qty": 0,
+      "net": 8710,
+      "total_qty": 8710,
+      "last_updated": "2026-07-17 14:53:02"
+    },
+    {
+      "price": 174.9,
+      "bid_qty": 21840,
+      "ask_qty": 0,
+      "net": 21840,
+      "total_qty": 21840,
+      "last_updated": "2026-07-17 14:52:37"
+    },
+    {
+      "price": 174.95,
+      "bid_qty": 1950,
+      "ask_qty": 5330,
+      "net": -3380,
+      "total_qty": 7280,
+      "last_updated": "2026-07-17 14:53:04"
+    },
+    {
+      "price": 175.0,
+      "bid_qty": 26390,
+      "ask_qty": 8970,
+      "net": 17420,
+      "total_qty": 35360,
+      "last_updated": "2026-07-17 14:52:17"
+    },
+    {
+      "price": 175.05,
+      "bid_qty": 3315,
+      "ask_qty": 5265,
+      "net": -1950,
+      "total_qty": 8580,
+      "last_updated": "2026-07-17 14:51:59"
+    },
+    {
+      "price": 175.1,
+      "bid_qty": 10920,
+      "ask_qty": 1300,
+      "net": 9620,
+      "total_qty": 12220,
+      "last_updated": "2026-07-17 14:52:13"
+    },
+    {
+      "price": 175.15,
+      "bid_qty": 5655,
+      "ask_qty": 0,
+      "net": 5655,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:52:56"
+    },
+    {
+      "price": 175.2,
+      "bid_qty": 2860,
+      "ask_qty": 3770,
+      "net": -910,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:50:22"
+    },
+    {
+      "price": 175.25,
+      "bid_qty": 1300,
+      "ask_qty": 3120,
+      "net": -1820,
+      "total_qty": 4420,
+      "last_updated": "2026-07-17 14:53:06"
+    },
+    {
+      "price": 175.3,
+      "bid_qty": 9490,
+      "ask_qty": 9425,
+      "net": 65,
+      "total_qty": 18915,
+      "last_updated": "2026-07-17 14:52:38"
+    },
+    {
+      "price": 175.35,
+      "bid_qty": 6305,
+      "ask_qty": 0,
+      "net": 6305,
+      "total_qty": 6305,
+      "last_updated": "2026-07-17 14:52:45"
+    },
+    {
+      "price": 175.4,
+      "bid_qty": 3965,
+      "ask_qty": 2470,
+      "net": 1495,
+      "total_qty": 6435,
+      "last_updated": "2026-07-17 14:52:18"
+    },
+    {
+      "price": 175.45,
+      "bid_qty": 2470,
+      "ask_qty": 7800,
+      "net": -5330,
+      "total_qty": 10270,
+      "last_updated": "2026-07-17 14:53:02"
+    },
+    {
+      "price": 175.5,
+      "bid_qty": 8970,
+      "ask_qty": 13585,
+      "net": -4615,
+      "total_qty": 22555,
+      "last_updated": "2026-07-17 14:52:05"
+    },
+    {
+      "price": 175.55,
+      "bid_qty": 2340,
+      "ask_qty": 4420,
+      "net": -2080,
+      "total_qty": 6760,
+      "last_updated": "2026-07-17 14:52:54"
+    },
+    {
+      "price": 175.6,
+      "bid_qty": 5720,
+      "ask_qty": 9815,
+      "net": -4095,
+      "total_qty": 15535,
+      "last_updated": "2026-07-17 14:52:40"
+    },
+    {
+      "price": 175.65,
+      "bid_qty": 3510,
+      "ask_qty": 0,
+      "net": 3510,
+      "total_qty": 3510,
+      "last_updated": "2026-07-17 14:51:54"
+    },
+    {
+      "price": 175.7,
+      "bid_qty": 12155,
+      "ask_qty": 19825,
+      "net": -7670,
+      "total_qty": 31980,
+      "last_updated": "2026-07-17 14:53:01"
+    },
+    {
+      "price": 175.75,
+      "bid_qty": 0,
+      "ask_qty": 7865,
+      "net": -7865,
+      "total_qty": 7865,
+      "last_updated": "2026-07-17 14:51:47"
+    },
+    {
+      "price": 175.8,
+      "bid_qty": 9360,
+      "ask_qty": 13585,
+      "net": -4225,
+      "total_qty": 22945,
+      "last_updated": "2026-07-17 14:52:58"
+    },
+    {
+      "price": 175.85,
+      "bid_qty": 520,
+      "ask_qty": 4290,
+      "net": -3770,
+      "total_qty": 4810,
+      "last_updated": "2026-07-17 14:51:45"
+    },
+    {
+      "price": 175.9,
+      "bid_qty": 3770,
+      "ask_qty": 18005,
+      "net": -14235,
+      "total_qty": 21775,
+      "last_updated": "2026-07-17 14:52:30"
+    },
+    {
+      "price": 175.95,
+      "bid_qty": 18915,
+      "ask_qty": 780,
+      "net": 18135,
+      "total_qty": 19695,
+      "last_updated": "2026-07-17 14:52:56"
+    },
+    {
+      "price": 176.0,
+      "bid_qty": 16380,
+      "ask_qty": 6760,
+      "net": 9620,
+      "total_qty": 23140,
+      "last_updated": "2026-07-17 14:52:13"
+    },
+    {
+      "price": 176.05,
+      "bid_qty": 2470,
+      "ask_qty": 4680,
+      "net": -2210,
+      "total_qty": 7150,
+      "last_updated": "2026-07-17 14:52:32"
+    },
+    {
+      "price": 176.1,
+      "bid_qty": 0,
+      "ask_qty": 4355,
+      "net": -4355,
+      "total_qty": 4355,
+      "last_updated": "2026-07-17 14:52:12"
+    },
+    {
+      "price": 176.15,
+      "bid_qty": 5460,
+      "ask_qty": 7345,
+      "net": -1885,
+      "total_qty": 12805,
+      "last_updated": "2026-07-17 14:52:59"
+    },
+    {
+      "price": 176.2,
+      "bid_qty": 5850,
+      "ask_qty": 11635,
+      "net": -5785,
+      "total_qty": 17485,
+      "last_updated": "2026-07-17 14:52:54"
+    },
+    {
+      "price": 176.25,
+      "bid_qty": 2925,
+      "ask_qty": 5850,
+      "net": -2925,
+      "total_qty": 8775,
+      "last_updated": "2026-07-17 14:52:40"
+    },
+    {
+      "price": 176.3,
+      "bid_qty": 9100,
+      "ask_qty": 0,
+      "net": 9100,
+      "total_qty": 9100,
+      "last_updated": "2026-07-17 14:52:07"
+    },
+    {
+      "price": 176.35,
+      "bid_qty": 9490,
+      "ask_qty": 4485,
+      "net": 5005,
+      "total_qty": 13975,
+      "last_updated": "2026-07-17 14:52:45"
+    },
+    {
+      "price": 176.4,
+      "bid_qty": 3250,
+      "ask_qty": 22230,
+      "net": -18980,
+      "total_qty": 25480,
+      "last_updated": "2026-07-17 14:52:50"
+    },
+    {
+      "price": 176.45,
+      "bid_qty": 6760,
+      "ask_qty": 1300,
+      "net": 5460,
+      "total_qty": 8060,
+      "last_updated": "2026-07-17 14:51:37"
+    },
+    {
+      "price": 176.5,
+      "bid_qty": 3510,
+      "ask_qty": 1365,
+      "net": 2145,
+      "total_qty": 4875,
+      "last_updated": "2026-07-17 14:51:54"
+    },
+    {
+      "price": 176.55,
+      "bid_qty": 3250,
+      "ask_qty": 9750,
+      "net": -6500,
+      "total_qty": 13000,
+      "last_updated": "2026-07-17 14:52:58"
+    },
+    {
+      "price": 176.6,
+      "bid_qty": 10725,
+      "ask_qty": 0,
+      "net": 10725,
+      "total_qty": 10725,
+      "last_updated": "2026-07-17 14:52:25"
+    },
+    {
+      "price": 176.65,
+      "bid_qty": 1170,
+      "ask_qty": 1950,
+      "net": -780,
+      "total_qty": 3120,
+      "last_updated": "2026-07-17 14:50:57"
+    },
+    {
+      "price": 176.7,
+      "bid_qty": 3770,
+      "ask_qty": 10270,
+      "net": -6500,
+      "total_qty": 14040,
+      "last_updated": "2026-07-17 14:52:30"
+    },
+    {
+      "price": 176.75,
+      "bid_qty": 1755,
+      "ask_qty": 14300,
+      "net": -12545,
+      "total_qty": 16055,
+      "last_updated": "2026-07-17 14:52:20"
+    },
+    {
+      "price": 176.8,
+      "bid_qty": 15990,
+      "ask_qty": 14950,
+      "net": 1040,
+      "total_qty": 30940,
+      "last_updated": "2026-07-17 14:52:04"
+    },
+    {
+      "price": 176.85,
+      "bid_qty": 8970,
+      "ask_qty": 6955,
+      "net": 2015,
+      "total_qty": 15925,
+      "last_updated": "2026-07-17 14:52:48"
+    },
+    {
+      "price": 176.9,
+      "bid_qty": 1560,
+      "ask_qty": 2210,
+      "net": -650,
+      "total_qty": 3770,
+      "last_updated": "2026-07-17 14:52:10"
+    },
+    {
+      "price": 176.95,
+      "bid_qty": 1170,
+      "ask_qty": 780,
+      "net": 390,
+      "total_qty": 1950,
+      "last_updated": "2026-07-17 14:45:14"
+    },
+    {
+      "price": 177.0,
+      "bid_qty": 65195,
+      "ask_qty": 54600,
+      "net": 10595,
+      "total_qty": 119795,
+      "last_updated": "2026-07-17 14:52:27"
+    },
+    {
+      "price": 177.05,
+      "bid_qty": 5330,
+      "ask_qty": 6110,
+      "net": -780,
+      "total_qty": 11440,
+      "last_updated": "2026-07-17 14:52:45"
+    },
+    {
+      "price": 177.1,
+      "bid_qty": 2470,
+      "ask_qty": 8320,
+      "net": -5850,
+      "total_qty": 10790,
+      "last_updated": "2026-07-17 14:52:07"
+    },
+    {
+      "price": 177.15,
+      "bid_qty": 6630,
+      "ask_qty": 1300,
+      "net": 5330,
+      "total_qty": 7930,
+      "last_updated": "2026-07-17 14:52:28"
+    },
+    {
+      "price": 177.2,
+      "bid_qty": 9100,
+      "ask_qty": 11375,
+      "net": -2275,
+      "total_qty": 20475,
+      "last_updated": "2026-07-17 14:51:34"
+    },
+    {
+      "price": 177.25,
+      "bid_qty": 5460,
+      "ask_qty": 0,
+      "net": 5460,
+      "total_qty": 5460,
+      "last_updated": "2026-07-17 14:48:41"
+    },
+    {
+      "price": 177.3,
+      "bid_qty": 24180,
+      "ask_qty": 7800,
+      "net": 16380,
+      "total_qty": 31980,
+      "last_updated": "2026-07-17 14:51:04"
+    },
+    {
+      "price": 177.35,
+      "bid_qty": 16510,
+      "ask_qty": 1755,
+      "net": 14755,
+      "total_qty": 18265,
+      "last_updated": "2026-07-17 14:52:25"
+    },
+    {
+      "price": 177.4,
+      "bid_qty": 8125,
+      "ask_qty": 7605,
+      "net": 520,
+      "total_qty": 15730,
+      "last_updated": "2026-07-17 14:51:02"
+    },
+    {
+      "price": 177.45,
+      "bid_qty": 14170,
+      "ask_qty": 910,
+      "net": 13260,
+      "total_qty": 15080,
+      "last_updated": "2026-07-17 14:50:04"
+    },
+    {
+      "price": 177.5,
+      "bid_qty": 7670,
+      "ask_qty": 4095,
+      "net": 3575,
+      "total_qty": 11765,
+      "last_updated": "2026-07-17 14:50:44"
+    },
+    {
+      "price": 177.55,
+      "bid_qty": 6435,
+      "ask_qty": 0,
+      "net": 6435,
+      "total_qty": 6435,
+      "last_updated": "2026-07-17 14:51:11"
+    },
+    {
+      "price": 177.6,
+      "bid_qty": 8255,
+      "ask_qty": 18460,
+      "net": -10205,
+      "total_qty": 26715,
+      "last_updated": "2026-07-17 14:52:23"
+    },
+    {
+      "price": 177.65,
+      "bid_qty": 7800,
+      "ask_qty": 3250,
+      "net": 4550,
+      "total_qty": 11050,
+      "last_updated": "2026-07-17 14:51:32"
+    },
+    {
+      "price": 177.7,
+      "bid_qty": 7410,
+      "ask_qty": 9100,
+      "net": -1690,
+      "total_qty": 16510,
+      "last_updated": "2026-07-17 14:52:10"
+    },
+    {
+      "price": 177.75,
+      "bid_qty": 3575,
+      "ask_qty": 3250,
+      "net": 325,
+      "total_qty": 6825,
+      "last_updated": "2026-07-17 14:48:48"
+    },
+    {
+      "price": 177.8,
+      "bid_qty": 12870,
+      "ask_qty": 5525,
+      "net": 7345,
+      "total_qty": 18395,
+      "last_updated": "2026-07-17 14:51:07"
+    },
+    {
+      "price": 177.85,
+      "bid_qty": 5915,
+      "ask_qty": 5330,
+      "net": 585,
+      "total_qty": 11245,
+      "last_updated": "2026-07-17 14:52:09"
+    },
+    {
+      "price": 177.9,
+      "bid_qty": 6370,
+      "ask_qty": 3120,
+      "net": 3250,
+      "total_qty": 9490,
+      "last_updated": "2026-07-17 14:49:34"
+    },
+    {
+      "price": 177.95,
+      "bid_qty": 6500,
+      "ask_qty": 0,
+      "net": 6500,
+      "total_qty": 6500,
+      "last_updated": "2026-07-17 14:51:24"
+    },
+    {
+      "price": 178.0,
+      "bid_qty": 53300,
+      "ask_qty": 64545,
+      "net": -11245,
+      "total_qty": 117845,
+      "last_updated": "2026-07-17 14:52:28"
+    },
+    {
+      "price": 178.05,
+      "bid_qty": 9620,
+      "ask_qty": 0,
+      "net": 9620,
+      "total_qty": 9620,
+      "last_updated": "2026-07-17 14:51:17"
+    },
+    {
+      "price": 178.1,
+      "bid_qty": 7410,
+      "ask_qty": 17810,
+      "net": -10400,
+      "total_qty": 25220,
+      "last_updated": "2026-07-17 14:51:04"
+    },
+    {
+      "price": 178.15,
+      "bid_qty": 3185,
+      "ask_qty": 10465,
+      "net": -7280,
+      "total_qty": 13650,
+      "last_updated": "2026-07-17 14:51:30"
+    },
+    {
+      "price": 178.2,
+      "bid_qty": 2860,
+      "ask_qty": 11830,
+      "net": -8970,
+      "total_qty": 14690,
+      "last_updated": "2026-07-17 14:46:01"
+    },
+    {
+      "price": 178.25,
+      "bid_qty": 3575,
+      "ask_qty": 7540,
+      "net": -3965,
+      "total_qty": 11115,
+      "last_updated": "2026-07-17 14:46:21"
+    },
+    {
+      "price": 178.3,
+      "bid_qty": 9555,
+      "ask_qty": 10400,
+      "net": -845,
+      "total_qty": 19955,
+      "last_updated": "2026-07-17 14:50:54"
+    },
+    {
+      "price": 178.35,
+      "bid_qty": 10140,
+      "ask_qty": 3120,
+      "net": 7020,
+      "total_qty": 13260,
+      "last_updated": "2026-07-17 14:49:57"
+    },
+    {
+      "price": 178.4,
+      "bid_qty": 3510,
+      "ask_qty": 15990,
+      "net": -12480,
+      "total_qty": 19500,
+      "last_updated": "2026-07-17 14:51:16"
+    },
+    {
+      "price": 178.45,
+      "bid_qty": 7150,
+      "ask_qty": 9620,
+      "net": -2470,
+      "total_qty": 16770,
+      "last_updated": "2026-07-17 14:50:12"
+    },
+    {
+      "price": 178.5,
+      "bid_qty": 10400,
+      "ask_qty": 4420,
+      "net": 5980,
+      "total_qty": 14820,
+      "last_updated": "2026-07-17 14:48:21"
+    },
+    {
+      "price": 178.55,
+      "bid_qty": 0,
+      "ask_qty": 6630,
+      "net": -6630,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:51:07"
+    },
+    {
+      "price": 178.6,
+      "bid_qty": 10140,
+      "ask_qty": 2860,
+      "net": 7280,
+      "total_qty": 13000,
+      "last_updated": "2026-07-17 14:51:27"
+    },
+    {
+      "price": 178.65,
+      "bid_qty": 6305,
+      "ask_qty": 8385,
+      "net": -2080,
+      "total_qty": 14690,
+      "last_updated": "2026-07-17 14:51:24"
+    },
+    {
+      "price": 178.7,
+      "bid_qty": 8645,
+      "ask_qty": 7280,
+      "net": 1365,
+      "total_qty": 15925,
+      "last_updated": "2026-07-17 14:49:52"
+    },
+    {
+      "price": 178.75,
+      "bid_qty": 3510,
+      "ask_qty": 1950,
+      "net": 1560,
+      "total_qty": 5460,
+      "last_updated": "2026-07-17 14:51:25"
+    },
+    {
+      "price": 178.8,
+      "bid_qty": 21190,
+      "ask_qty": 13260,
+      "net": 7930,
+      "total_qty": 34450,
+      "last_updated": "2026-07-17 14:51:29"
+    },
+    {
+      "price": 178.85,
+      "bid_qty": 12870,
+      "ask_qty": 6630,
+      "net": 6240,
+      "total_qty": 19500,
+      "last_updated": "2026-07-17 14:51:09"
+    },
+    {
+      "price": 178.9,
+      "bid_qty": 9945,
+      "ask_qty": 6110,
+      "net": 3835,
+      "total_qty": 16055,
+      "last_updated": "2026-07-17 14:48:00"
+    },
+    {
+      "price": 178.95,
+      "bid_qty": 10790,
+      "ask_qty": 10595,
+      "net": 195,
+      "total_qty": 21385,
+      "last_updated": "2026-07-17 14:51:17"
+    },
+    {
+      "price": 179.0,
+      "bid_qty": 10920,
+      "ask_qty": 13260,
+      "net": -2340,
+      "total_qty": 24180,
+      "last_updated": "2026-07-17 14:48:06"
+    },
+    {
+      "price": 179.05,
+      "bid_qty": 4875,
+      "ask_qty": 0,
+      "net": 4875,
+      "total_qty": 4875,
+      "last_updated": "2026-07-17 14:47:09"
+    },
+    {
+      "price": 179.1,
+      "bid_qty": 18655,
+      "ask_qty": 17810,
+      "net": 845,
+      "total_qty": 36465,
+      "last_updated": "2026-07-17 14:50:12"
+    },
+    {
+      "price": 179.15,
+      "bid_qty": 6305,
+      "ask_qty": 4680,
+      "net": 1625,
+      "total_qty": 10985,
+      "last_updated": "2026-07-17 14:51:19"
+    },
+    {
+      "price": 179.2,
+      "bid_qty": 12415,
+      "ask_qty": 10270,
+      "net": 2145,
+      "total_qty": 22685,
+      "last_updated": "2026-07-17 14:51:21"
+    },
+    {
+      "price": 179.25,
+      "bid_qty": 6630,
+      "ask_qty": 2600,
+      "net": 4030,
+      "total_qty": 9230,
+      "last_updated": "2026-07-17 14:51:14"
+    },
+    {
+      "price": 179.3,
+      "bid_qty": 9100,
+      "ask_qty": 14105,
+      "net": -5005,
+      "total_qty": 23205,
+      "last_updated": "2026-07-17 14:48:51"
+    },
+    {
+      "price": 179.35,
+      "bid_qty": 2340,
+      "ask_qty": 1040,
+      "net": 1300,
+      "total_qty": 3380,
+      "last_updated": "2026-07-17 14:51:21"
+    },
+    {
+      "price": 179.4,
+      "bid_qty": 6110,
+      "ask_qty": 1560,
+      "net": 4550,
+      "total_qty": 7670,
+      "last_updated": "2026-07-17 14:47:53"
+    },
+    {
+      "price": 179.45,
+      "bid_qty": 11440,
+      "ask_qty": 12545,
+      "net": -1105,
+      "total_qty": 23985,
+      "last_updated": "2026-07-17 14:51:27"
+    },
+    {
+      "price": 179.5,
+      "bid_qty": 8970,
+      "ask_qty": 7020,
+      "net": 1950,
+      "total_qty": 15990,
+      "last_updated": "2026-07-17 14:48:59"
+    },
+    {
+      "price": 179.55,
+      "bid_qty": 6630,
+      "ask_qty": 10140,
+      "net": -3510,
+      "total_qty": 16770,
+      "last_updated": "2026-07-17 14:51:25"
+    },
+    {
+      "price": 179.6,
+      "bid_qty": 0,
+      "ask_qty": 13325,
+      "net": -13325,
+      "total_qty": 13325,
+      "last_updated": "2026-07-17 14:50:15"
+    },
+    {
+      "price": 179.65,
+      "bid_qty": 910,
+      "ask_qty": 12675,
+      "net": -11765,
+      "total_qty": 13585,
+      "last_updated": "2026-07-17 14:49:51"
+    },
+    {
+      "price": 179.7,
+      "bid_qty": 0,
+      "ask_qty": 26000,
+      "net": -26000,
+      "total_qty": 26000,
+      "last_updated": "2026-07-17 14:49:43"
+    },
+    {
+      "price": 179.75,
+      "bid_qty": 10660,
+      "ask_qty": 5330,
+      "net": 5330,
+      "total_qty": 15990,
+      "last_updated": "2026-07-17 14:49:39"
+    },
+    {
+      "price": 179.8,
+      "bid_qty": 8840,
+      "ask_qty": 17095,
+      "net": -8255,
+      "total_qty": 25935,
+      "last_updated": "2026-07-17 14:49:38"
+    },
+    {
+      "price": 179.85,
+      "bid_qty": 6695,
+      "ask_qty": 9360,
+      "net": -2665,
+      "total_qty": 16055,
+      "last_updated": "2026-07-17 14:49:16"
+    },
+    {
+      "price": 179.9,
+      "bid_qty": 2990,
+      "ask_qty": 28340,
+      "net": -25350,
+      "total_qty": 31330,
+      "last_updated": "2026-07-17 14:51:21"
+    },
+    {
+      "price": 179.95,
+      "bid_qty": 8190,
+      "ask_qty": 3900,
+      "net": 4290,
+      "total_qty": 12090,
+      "last_updated": "2026-07-17 14:49:04"
+    },
+    {
+      "price": 180.0,
+      "bid_qty": 6435,
+      "ask_qty": 31915,
+      "net": -25480,
+      "total_qty": 38350,
+      "last_updated": "2026-07-17 14:49:56"
+    },
+    {
+      "price": 180.05,
+      "bid_qty": 6955,
+      "ask_qty": 390,
+      "net": 6565,
+      "total_qty": 7345,
+      "last_updated": "2026-07-17 14:49:54"
+    },
+    {
+      "price": 180.1,
+      "bid_qty": 4550,
+      "ask_qty": 3510,
+      "net": 1040,
+      "total_qty": 8060,
+      "last_updated": "2026-07-17 14:50:14"
+    },
+    {
+      "price": 180.15,
+      "bid_qty": 3510,
+      "ask_qty": 1950,
+      "net": 1560,
+      "total_qty": 5460,
+      "last_updated": "2026-07-17 14:51:21"
+    },
+    {
+      "price": 180.2,
+      "bid_qty": 7670,
+      "ask_qty": 5200,
+      "net": 2470,
+      "total_qty": 12870,
+      "last_updated": "2026-07-17 14:47:53"
+    },
+    {
+      "price": 180.25,
+      "bid_qty": 1820,
+      "ask_qty": 5395,
+      "net": -3575,
+      "total_qty": 7215,
+      "last_updated": "2026-07-17 14:47:55"
+    },
+    {
+      "price": 180.3,
+      "bid_qty": 10530,
+      "ask_qty": 8970,
+      "net": 1560,
+      "total_qty": 19500,
+      "last_updated": "2026-07-17 14:49:13"
+    },
+    {
+      "price": 180.35,
+      "bid_qty": 5070,
+      "ask_qty": 7020,
+      "net": -1950,
+      "total_qty": 12090,
+      "last_updated": "2026-07-17 14:49:29"
+    },
+    {
+      "price": 180.4,
+      "bid_qty": 13325,
+      "ask_qty": 7020,
+      "net": 6305,
+      "total_qty": 20345,
+      "last_updated": "2026-07-17 14:49:09"
+    },
+    {
+      "price": 180.45,
+      "bid_qty": 2925,
+      "ask_qty": 0,
+      "net": 2925,
+      "total_qty": 2925,
+      "last_updated": "2026-07-17 14:46:26"
+    },
+    {
+      "price": 180.55,
+      "bid_qty": 1690,
+      "ask_qty": 4550,
+      "net": -2860,
+      "total_qty": 6240,
+      "last_updated": "2026-07-17 14:49:39"
+    },
+    {
+      "price": 180.6,
+      "bid_qty": 9750,
+      "ask_qty": 6110,
+      "net": 3640,
+      "total_qty": 15860,
+      "last_updated": "2026-07-17 14:49:31"
+    },
+    {
+      "price": 180.65,
+      "bid_qty": 0,
+      "ask_qty": 9490,
+      "net": -9490,
+      "total_qty": 9490,
+      "last_updated": "2026-07-17 14:49:01"
+    },
+    {
+      "price": 180.7,
+      "bid_qty": 3120,
+      "ask_qty": 2535,
+      "net": 585,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:49:11"
+    },
+    {
+      "price": 180.75,
+      "bid_qty": 0,
+      "ask_qty": 4420,
+      "net": -4420,
+      "total_qty": 4420,
+      "last_updated": "2026-07-17 14:49:04"
+    },
+    {
+      "price": 180.8,
+      "bid_qty": 0,
+      "ask_qty": 9230,
+      "net": -9230,
+      "total_qty": 9230,
+      "last_updated": "2026-07-17 14:49:16"
+    },
+    {
+      "price": 180.85,
+      "bid_qty": 2795,
+      "ask_qty": 10595,
+      "net": -7800,
+      "total_qty": 13390,
+      "last_updated": "2026-07-17 14:49:56"
+    },
+    {
+      "price": 180.9,
+      "bid_qty": 0,
+      "ask_qty": 7865,
+      "net": -7865,
+      "total_qty": 7865,
+      "last_updated": "2026-07-17 14:47:39"
+    },
+    {
+      "price": 180.95,
+      "bid_qty": 780,
+      "ask_qty": 3380,
+      "net": -2600,
+      "total_qty": 4160,
+      "last_updated": "2026-07-17 14:46:50"
+    },
+    {
+      "price": 181.0,
+      "bid_qty": 0,
+      "ask_qty": 4290,
+      "net": -4290,
+      "total_qty": 4290,
+      "last_updated": "2026-07-17 14:49:05"
+    },
+    {
+      "price": 181.05,
+      "bid_qty": 0,
+      "ask_qty": 3900,
+      "net": -3900,
+      "total_qty": 3900,
+      "last_updated": "2026-07-17 14:47:38"
+    },
+    {
+      "price": 181.1,
+      "bid_qty": 7280,
+      "ask_qty": 14235,
+      "net": -6955,
+      "total_qty": 21515,
+      "last_updated": "2026-07-17 14:49:21"
+    },
+    {
+      "price": 181.15,
+      "bid_qty": 2535,
+      "ask_qty": 1040,
+      "net": 1495,
+      "total_qty": 3575,
+      "last_updated": "2026-07-17 14:49:29"
+    },
+    {
+      "price": 181.2,
+      "bid_qty": 3315,
+      "ask_qty": 6500,
+      "net": -3185,
+      "total_qty": 9815,
+      "last_updated": "2026-07-17 14:49:14"
+    },
+    {
+      "price": 181.25,
+      "bid_qty": 1950,
+      "ask_qty": 2990,
+      "net": -1040,
+      "total_qty": 4940,
+      "last_updated": "2026-07-17 14:49:09"
+    },
+    {
+      "price": 181.3,
+      "bid_qty": 3770,
+      "ask_qty": 3705,
+      "net": 65,
+      "total_qty": 7475,
+      "last_updated": "2026-07-17 14:47:37"
+    },
+    {
+      "price": 181.35,
+      "bid_qty": 0,
+      "ask_qty": 1560,
+      "net": -1560,
+      "total_qty": 1560,
+      "last_updated": "2026-07-17 14:44:48"
+    },
+    {
+      "price": 181.45,
+      "bid_qty": 5980,
+      "ask_qty": 8840,
+      "net": -2860,
+      "total_qty": 14820,
+      "last_updated": "2026-07-17 14:49:31"
+    },
+    {
+      "price": 181.5,
+      "bid_qty": 6695,
+      "ask_qty": 0,
+      "net": 6695,
+      "total_qty": 6695,
+      "last_updated": "2026-07-17 14:47:29"
+    },
+    {
+      "price": 181.55,
+      "bid_qty": 975,
+      "ask_qty": 1170,
+      "net": -195,
+      "total_qty": 2145,
+      "last_updated": "2026-07-17 14:49:11"
+    },
+    {
+      "price": 181.6,
+      "bid_qty": 6435,
+      "ask_qty": 0,
+      "net": 6435,
+      "total_qty": 6435,
+      "last_updated": "2026-07-17 14:47:24"
+    },
+    {
+      "price": 181.7,
+      "bid_qty": 0,
+      "ask_qty": 1950,
+      "net": -1950,
+      "total_qty": 1950,
+      "last_updated": "2026-07-17 14:49:08"
+    },
+    {
+      "price": 181.75,
+      "bid_qty": 8385,
+      "ask_qty": 2340,
+      "net": 6045,
+      "total_qty": 10725,
+      "last_updated": "2026-07-17 14:47:00"
+    },
+    {
+      "price": 181.8,
+      "bid_qty": 2080,
+      "ask_qty": 4420,
+      "net": -2340,
+      "total_qty": 6500,
+      "last_updated": "2026-07-17 14:46:50"
+    },
+    {
+      "price": 181.9,
+      "bid_qty": 3315,
+      "ask_qty": 0,
+      "net": 3315,
+      "total_qty": 3315,
+      "last_updated": "2026-07-17 14:46:59"
+    },
+    {
+      "price": 181.95,
+      "bid_qty": 0,
+      "ask_qty": 5460,
+      "net": -5460,
+      "total_qty": 5460,
+      "last_updated": "2026-07-17 14:47:02"
+    },
+    {
+      "price": 182.0,
+      "bid_qty": 0,
+      "ask_qty": 5850,
+      "net": -5850,
+      "total_qty": 5850,
+      "last_updated": "2026-07-17 14:47:30"
+    },
+    {
+      "price": 182.05,
+      "bid_qty": 0,
+      "ask_qty": 5005,
+      "net": -5005,
+      "total_qty": 5005,
+      "last_updated": "2026-07-17 14:47:35"
+    },
+    {
+      "price": 182.1,
+      "bid_qty": 6630,
+      "ask_qty": 0,
+      "net": 6630,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:47:32"
+    },
+    {
+      "price": 182.15,
+      "bid_qty": 910,
+      "ask_qty": 1170,
+      "net": -260,
+      "total_qty": 2080,
+      "last_updated": "2026-07-17 14:46:38"
+    },
+    {
+      "price": 182.2,
+      "bid_qty": 0,
+      "ask_qty": 5070,
+      "net": -5070,
+      "total_qty": 5070,
+      "last_updated": "2026-07-17 14:47:34"
+    },
+    {
+      "price": 182.25,
+      "bid_qty": 585,
+      "ask_qty": 0,
+      "net": 585,
+      "total_qty": 585,
+      "last_updated": "2026-07-17 14:46:32"
+    },
+    {
+      "price": 182.3,
+      "bid_qty": 3315,
+      "ask_qty": 14820,
+      "net": -11505,
+      "total_qty": 18135,
+      "last_updated": "2026-07-17 14:47:29"
+    },
+    {
+      "price": 182.35,
+      "bid_qty": 4550,
+      "ask_qty": 2210,
+      "net": 2340,
+      "total_qty": 6760,
+      "last_updated": "2026-07-17 14:47:25"
+    },
+    {
+      "price": 182.4,
+      "bid_qty": 0,
+      "ask_qty": 5655,
+      "net": -5655,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:46:56"
+    },
+    {
+      "price": 182.5,
+      "bid_qty": 5655,
+      "ask_qty": 0,
+      "net": 5655,
+      "total_qty": 5655,
+      "last_updated": "2026-07-17 14:46:42"
+    },
+    {
+      "price": 182.55,
+      "bid_qty": 0,
+      "ask_qty": 6435,
+      "net": -6435,
+      "total_qty": 6435,
+      "last_updated": "2026-07-17 14:47:00"
+    },
+    {
+      "price": 182.6,
+      "bid_qty": 2860,
+      "ask_qty": 0,
+      "net": 2860,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:46:31"
+    },
+    {
+      "price": 182.65,
+      "bid_qty": 910,
+      "ask_qty": 0,
+      "net": 910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:46:44"
+    },
+    {
+      "price": 182.7,
+      "bid_qty": 0,
+      "ask_qty": 6630,
+      "net": -6630,
+      "total_qty": 6630,
+      "last_updated": "2026-07-17 14:46:59"
+    },
+    {
+      "price": 182.8,
+      "bid_qty": 2730,
+      "ask_qty": 0,
+      "net": 2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:46:29"
+    },
+    {
+      "price": 182.85,
+      "bid_qty": 0,
+      "ask_qty": 1690,
+      "net": -1690,
+      "total_qty": 1690,
+      "last_updated": "2026-07-17 14:47:32"
+    },
+    {
+      "price": 182.95,
+      "bid_qty": 0,
+      "ask_qty": 1300,
+      "net": -1300,
+      "total_qty": 1300,
+      "last_updated": "2026-07-17 14:46:40"
+    },
+    {
+      "price": 183.0,
+      "bid_qty": 0,
+      "ask_qty": 2730,
+      "net": -2730,
+      "total_qty": 2730,
+      "last_updated": "2026-07-17 14:46:38"
+    },
+    {
+      "price": 183.15,
+      "bid_qty": 0,
+      "ask_qty": 3445,
+      "net": -3445,
+      "total_qty": 3445,
+      "last_updated": "2026-07-17 14:46:46"
+    },
+    {
+      "price": 183.2,
+      "bid_qty": 0,
+      "ask_qty": 3640,
+      "net": -3640,
+      "total_qty": 3640,
+      "last_updated": "2026-07-17 14:47:25"
+    },
+    {
+      "price": 183.3,
+      "bid_qty": 0,
+      "ask_qty": 6240,
+      "net": -6240,
+      "total_qty": 6240,
+      "last_updated": "2026-07-17 14:46:42"
+    },
+    {
+      "price": 183.4,
+      "bid_qty": 0,
+      "ask_qty": 910,
+      "net": -910,
+      "total_qty": 910,
+      "last_updated": "2026-07-17 14:46:44"
+    },
+    {
+      "price": 183.45,
+      "bid_qty": 0,
+      "ask_qty": 2860,
+      "net": -2860,
+      "total_qty": 2860,
+      "last_updated": "2026-07-17 14:46:31"
+    },
+    {
+      "price": 183.7,
+      "bid_qty": 0,
+      "ask_qty": 1560,
+      "net": -1560,
+      "total_qty": 1560,
+      "last_updated": "2026-07-17 14:46:29"
+    }
+  ]
+}

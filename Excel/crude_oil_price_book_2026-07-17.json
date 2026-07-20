@@ -1,0 +1,46 @@
+{
+  "title": "MCX Crude Oil Futures",
+  "generated_at": "2026-07-17 20:32:32",
+  "rows": [
+    {
+      "price": 7770,
+      "bid_qty": 1217,
+      "ask_qty": 0,
+      "net": 1217,
+      "total_qty": 1217,
+      "last_updated": "2026-07-17 18:01:58"
+    },
+    {
+      "price": 7780,
+      "bid_qty": 2166,
+      "ask_qty": 1745,
+      "net": 421,
+      "total_qty": 3911,
+      "last_updated": "2026-07-17 18:01:58"
+    },
+    {
+      "price": 7790,
+      "bid_qty": 947,
+      "ask_qty": 3155,
+      "net": -2208,
+      "total_qty": 4102,
+      "last_updated": "2026-07-17 18:02:03"
+    },
+    {
+      "price": 7800,
+      "bid_qty": 69,
+      "ask_qty": 997,
+      "net": -928,
+      "total_qty": 1066,
+      "last_updated": "2026-07-17 18:02:03"
+    },
+    {
+      "price": 7810,
+      "bid_qty": 0,
+      "ask_qty": 44,
+      "net": -44,
+      "total_qty": 44,
+      "last_updated": "2026-07-17 18:01:58"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "NIFTY Current-Month Futures",
+  "generated_at": "2026-07-17 15:15:18",
+  "rows": [
+    {
+      "price": 24290,
+      "bid_qty": 22425,
+      "ask_qty": 0,
+      "net": 22425,
+      "total_qty": 22425,
+      "last_updated": "2026-07-17 15:00:49"
+    },
+    {
+      "price": 24300,
+      "bid_qty": 176150,
+      "ask_qty": 111540,
+      "net": 64610,
+      "total_qty": 287690,
+      "last_updated": "2026-07-17 15:15:18"
+    },
+    {
+      "price": 24310,
+      "bid_qty": 353795,
+      "ask_qty": 147355,
+      "net": 206440,
+      "total_qty": 501150,
+      "last_updated": "2026-07-17 15:15:15"
+    },
+    {
+      "price": 24320,
+      "bid_qty": 12220,
+      "ask_qty": 475930,
+      "net": -463710,
+      "total_qty": 488150,
+      "last_updated": "2026-07-17 15:15:00"
+    },
+    {
+      "price": 24330,
+      "bid_qty": 0,
+      "ask_qty": 15665,
+      "net": -15665,
+      "total_qty": 15665,
+      "last_updated": "2026-07-17 15:12:58"
+    }
+  ]
+}

@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5">
+<title>NIFTY Current-Month Futures — Cumulative Depth &middot; Cumulative Depth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #08090c; --bg-glow: #10141d; --panel: #11151d; --panel-2: #151a24;
+        --border: #232a38; --text: #e8ecf1; --muted: #6f7a8a;
+        --buy: #00d38a; --buy-dim: rgba(0,211,138,0.12);
+        --sell: #ff4d6a; --sell-dim: rgba(255,77,106,0.12);
+        --amber: #f5b53f; --amber-dim: rgba(245,181,63,0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        background: radial-gradient(1100px 500px at 12% -10%, var(--bg-glow), transparent 60%), var(--bg);
+        color: var(--text); padding: 44px 24px 60px;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    header { margin-bottom: 26px; }
+    .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--amber);
+        font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); animation: pulse 1.8s infinite; }
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(245,181,63,0.55); }
+        70% { box-shadow: 0 0 0 8px rgba(245,181,63,0); }
+        100% { box-shadow: 0 0 0 0 rgba(245,181,63,0); }
+    }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 26px; margin: 0 0 4px; }
+    .subtitle { color: var(--muted); font-size: 12.5px; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .stat .label { font-family: 'Space Grotesk', sans-serif; color: var(--muted); font-size: 10.5px;
+        text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .stat .value { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat .value.buy { color: var(--buy); }
+    .stat .value.sell { color: var(--sell); }
+    .net-positive { color: var(--buy); }
+    .net-negative { color: var(--sell); }
+    .net-neutral { color: var(--muted); }
+
+    .walls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .wall-card { border-radius: 10px; padding: 14px 16px; border: 1px solid var(--border); }
+    .wall-card.bid { background: var(--buy-dim); border-color: rgba(0,211,138,0.3); }
+    .wall-card.ask { background: var(--sell-dim); border-color: rgba(255,77,106,0.3); }
+    .wall-card .label { font-family: 'Space Grotesk', sans-serif; font-size: 10.5px; text-transform: uppercase;
+        letter-spacing: 1px; margin-bottom: 6px; }
+    .wall-card.bid .label { color: var(--buy); }
+    .wall-card.ask .label { color: var(--sell); }
+    .wall-card .price { font-size: 22px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+    .wall-card .qty { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+        overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { text-align: right; font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+        text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
+        padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--panel-2); }
+    thead th:first-child { text-align: left; }
+    tbody td { text-align: right; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.035);
+        font-variant-numeric: tabular-nums; font-size: 13.5px; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    tbody tr.fresh { background: rgba(245,181,63,0.05); }
+    tbody tr.big-row { background: var(--amber-dim); }
+    td.price { text-align: left; font-weight: 600; padding-left: 26px; }
+    td.bid { color: var(--buy); }
+    td.ask { color: var(--sell); }
+    td.bid.big-cell, td.ask.big-cell { font-weight: 700; }
+    .whale { display: inline-block; font-size: 10px; color: var(--amber); border: 1px solid var(--amber);
+        border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+    td.time { color: var(--muted); font-size: 11.5px; }
+    td.empty { text-align: center; color: var(--muted); padding: 48px 0; font-size: 13px; }
+
+    footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="eyebrow"><span class="live-dot"></span>Live &middot; Cumulative full-depth (all 5 levels)</div>
+        <h1>NIFTY Current-Month Futures — Cumulative Depth</h1>
+        <div class="subtitle">NFO:NIFTY26JULFUT &middot; LTP 24345.0 &middot; Auto-refreshes every 5s &middot; 249 price levels tracked</div>
+    </header>
+
+    <div class="stats">
+        <div class="stat"><div class="label">Total Bid Qty</div><div class="value buy">2,998,710</div></div>
+        <div class="stat"><div class="label">Total Ask Qty</div><div class="value sell">1,622,985</div></div>
+        <div class="stat"><div class="label">Net Imbalance</div><div class="value net-positive">+1,375,725</div></div>
+        <div class="stat"><div class="label">Last Refresh</div><div class="value">16:29:41</div></div>
+    </div>
+
+    <div class="walls">
+        <div class="wall-card bid">
+            <div class="label">&#128040; Biggest Bid Wall</div>
+            <div class="price">24333.4</div>
+            <div class="qty">562,380 cumulative qty resting here</div>
+        </div>
+        <div class="wall-card ask">
+            <div class="label">&#128040; Biggest Ask Wall</div>
+            <div class="price">24325.0</div>
+            <div class="qty">423,410 cumulative qty resting here</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Bid Qty (cum.)</th>
+                    <th>Ask Qty (cum.)</th>
+                    <th>Net (Bid &minus; Ask)</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row">
+                    <td class="price">24313.0</td>
+                    <td class="bid">390</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+390</td>
+                    <td class="time">2026-07-17 15:23:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24313.2</td>
+                    <td class="bid">1,560</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,560</td>
+                    <td class="time">2026-07-17 15:23:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24313.3</td>
+                    <td class="bid">2,860</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,860</td>
+                    <td class="time">2026-07-17 15:23:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24313.6</td>
+                    <td class="bid">975</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+975</td>
+                    <td class="time">2026-07-17 15:23:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24313.7</td>
+                    <td class="bid">585</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+585</td>
+                    <td class="time">2026-07-17 15:23:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24314.1</td>
+                    <td class="bid">2,080</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,080</td>
+                    <td class="time">2026-07-17 15:23:01</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24314.9</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24315.0</td>
+                    <td class="bid">52,000</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+52,000</td>
+                    <td class="time">2026-07-17 15:23:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24315.1</td>
+                    <td class="bid">260</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+260</td>
+                    <td class="time">2026-07-17 15:23:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24315.5</td>
+                    <td class="bid">520</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+520</td>
+                    <td class="time">2026-07-17 15:22:59</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24315.7</td>
+                    <td class="bid">2,990</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,990</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24315.8</td>
+                    <td class="bid">5,590</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+5,590</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24316.0</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:21</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24316.2</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:26</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24316.3</td>
+                    <td class="bid">1,820</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,820</td>
+                    <td class="time">2026-07-17 15:23:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24316.4</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:33</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24316.7</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24317.0</td>
+                    <td class="bid">780</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+780</td>
+                    <td class="time">2026-07-17 15:23:30</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24317.1</td>
+                    <td class="bid">520</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+520</td>
+                    <td class="time">2026-07-17 15:23:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24319.0</td>
+                    <td class="bid">10,530</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+10,530</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24319.5</td>
+                    <td class="bid">520</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+520</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24319.9</td>
+                    <td class="bid">7,930</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+7,930</td>
+                    <td class="time">2026-07-17 15:23:01</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24320.0</td>
+                    <td class="bid big-cell">123,955 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+123,955</td>
+                    <td class="time">2026-07-17 15:24:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24320.1</td>
+                    <td class="bid">520</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+520</td>
+                    <td class="time">2026-07-17 15:24:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24320.3</td>
+                    <td class="bid">780</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+780</td>
+                    <td class="time">2026-07-17 15:22:59</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24320.4</td>
+                    <td class="bid">22,880</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+22,880</td>
+                    <td class="time">2026-07-17 15:23:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24320.8</td>
+                    <td class="bid">585</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+585</td>
+                    <td class="time">2026-07-17 15:22:40</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24320.9</td>
+                    <td class="bid">4,420</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+4,420</td>
+                    <td class="time">2026-07-17 15:23:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.0</td>
+                    <td class="bid">3,510</td>
+                    <td class="ask">390</td>
+                    <td class="net-positive">+3,120</td>
+                    <td class="time">2026-07-17 15:24:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.1</td>
+                    <td class="bid">2,340</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,340</td>
+                    <td class="time">2026-07-17 15:22:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.2</td>
+                    <td class="bid">260</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+260</td>
+                    <td class="time">2026-07-17 15:22:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.4</td>
+                    <td class="bid">5,915</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+5,915</td>
+                    <td class="time">2026-07-17 15:23:21</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.6</td>
+                    <td class="bid">780</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+780</td>
+                    <td class="time">2026-07-17 15:24:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.7</td>
+                    <td class="bid">65</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+65</td>
+                    <td class="time">2026-07-17 15:23:01</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.8</td>
+                    <td class="bid">3,575</td>
+                    <td class="ask">2,275</td>
+                    <td class="net-positive">+1,300</td>
+                    <td class="time">2026-07-17 15:23:46</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24321.9</td>
+                    <td class="bid">41,340</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+41,340</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.0</td>
+                    <td class="bid">8,580</td>
+                    <td class="ask">1,885</td>
+                    <td class="net-positive">+6,695</td>
+                    <td class="time">2026-07-17 15:24:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.1</td>
+                    <td class="bid">1,820</td>
+                    <td class="ask">3,250</td>
+                    <td class="net-negative">-1,430</td>
+                    <td class="time">2026-07-17 15:23:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.2</td>
+                    <td class="bid">1,690</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,690</td>
+                    <td class="time">2026-07-17 15:23:26</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.3</td>
+                    <td class="bid">3,640</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+3,640</td>
+                    <td class="time">2026-07-17 15:23:26</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.4</td>
+                    <td class="bid">8,970</td>
+                    <td class="ask">4,420</td>
+                    <td class="net-positive">+4,550</td>
+                    <td class="time">2026-07-17 15:24:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:23:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:22:59</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24322.9</td>
+                    <td class="bid">1,690</td>
+                    <td class="ask">780</td>
+                    <td class="net-positive">+910</td>
+                    <td class="time">2026-07-17 15:23:30</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24323.0</td>
+                    <td class="bid">325</td>
+                    <td class="ask">195</td>
+                    <td class="net-positive">+130</td>
+                    <td class="time">2026-07-17 15:23:21</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24323.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">4,680</td>
+                    <td class="net-negative">-4,680</td>
+                    <td class="time">2026-07-17 15:23:16</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24323.4</td>
+                    <td class="bid">5,785</td>
+                    <td class="ask">325</td>
+                    <td class="net-positive">+5,460</td>
+                    <td class="time">2026-07-17 15:23:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24323.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,470</td>
+                    <td class="net-negative">-2,470</td>
+                    <td class="time">2026-07-17 15:23:21</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24323.9</td>
+                    <td class="bid">4,225</td>
+                    <td class="ask">9,035</td>
+                    <td class="net-negative">-4,810</td>
+                    <td class="time">2026-07-17 15:24:09</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24324.0</td>
+                    <td class="bid">845</td>
+                    <td class="ask big-cell">134,355 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-133,510</td>
+                    <td class="time">2026-07-17 15:25:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.1</td>
+                    <td class="bid">0</td>
+                    <td class="ask">780</td>
+                    <td class="net-negative">-780</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">5,850</td>
+                    <td class="net-negative">-5,850</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.3</td>
+                    <td class="bid">4,095</td>
+                    <td class="ask">6,630</td>
+                    <td class="net-negative">-2,535</td>
+                    <td class="time">2026-07-17 15:23:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.4</td>
+                    <td class="bid">3,315</td>
+                    <td class="ask">3,575</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:23:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,120</td>
+                    <td class="net-negative">-3,120</td>
+                    <td class="time">2026-07-17 15:23:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,300</td>
+                    <td class="net-negative">-1,300</td>
+                    <td class="time">2026-07-17 15:23:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,080</td>
+                    <td class="net-negative">-2,080</td>
+                    <td class="time">2026-07-17 15:23:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,665</td>
+                    <td class="net-negative">-2,665</td>
+                    <td class="time">2026-07-17 15:22:56</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24324.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">5,395</td>
+                    <td class="net-negative">-5,395</td>
+                    <td class="time">2026-07-17 15:23:53</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24325.0</td>
+                    <td class="bid">2,340</td>
+                    <td class="ask big-cell">423,410 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-421,070</td>
+                    <td class="time">2026-07-17 15:25:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.1</td>
+                    <td class="bid">260</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-390</td>
+                    <td class="time">2026-07-17 15:25:10</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">975</td>
+                    <td class="net-negative">-975</td>
+                    <td class="time">2026-07-17 15:23:40</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.3</td>
+                    <td class="bid">260</td>
+                    <td class="ask">1,950</td>
+                    <td class="net-negative">-1,690</td>
+                    <td class="time">2026-07-17 15:25:24</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.4</td>
+                    <td class="bid">780</td>
+                    <td class="ask">2,340</td>
+                    <td class="net-negative">-1,560</td>
+                    <td class="time">2026-07-17 15:23:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">5,200</td>
+                    <td class="net-negative">-5,200</td>
+                    <td class="time">2026-07-17 15:23:52</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.7</td>
+                    <td class="bid">5,070</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+5,070</td>
+                    <td class="time">2026-07-17 15:24:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.8</td>
+                    <td class="bid">4,940</td>
+                    <td class="ask">2,080</td>
+                    <td class="net-positive">+2,860</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24325.9</td>
+                    <td class="bid">8,320</td>
+                    <td class="ask">585</td>
+                    <td class="net-positive">+7,735</td>
+                    <td class="time">2026-07-17 15:24:11</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.0</td>
+                    <td class="bid">5,850</td>
+                    <td class="ask">5,980</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:25:24</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">390</td>
+                    <td class="net-negative">-390</td>
+                    <td class="time">2026-07-17 15:23:26</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,510</td>
+                    <td class="net-negative">-3,510</td>
+                    <td class="time">2026-07-17 15:23:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">325</td>
+                    <td class="net-negative">-325</td>
+                    <td class="time">2026-07-17 15:24:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.6</td>
+                    <td class="bid">520</td>
+                    <td class="ask">130</td>
+                    <td class="net-positive">+390</td>
+                    <td class="time">2026-07-17 15:24:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,950</td>
+                    <td class="net-negative">-1,950</td>
+                    <td class="time">2026-07-17 15:23:30</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24326.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">455</td>
+                    <td class="net-negative">-455</td>
+                    <td class="time">2026-07-17 15:23:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.0</td>
+                    <td class="bid">2,275</td>
+                    <td class="ask">15,600</td>
+                    <td class="net-negative">-13,325</td>
+                    <td class="time">2026-07-17 15:27:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.4</td>
+                    <td class="bid">1,170</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,170</td>
+                    <td class="time">2026-07-17 15:27:10</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.5</td>
+                    <td class="bid">260</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+260</td>
+                    <td class="time">2026-07-17 15:26:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">325</td>
+                    <td class="net-negative">-325</td>
+                    <td class="time">2026-07-17 15:23:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,040</td>
+                    <td class="net-negative">-1,040</td>
+                    <td class="time">2026-07-17 15:24:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24327.9</td>
+                    <td class="bid">2,990</td>
+                    <td class="ask">780</td>
+                    <td class="net-positive">+2,210</td>
+                    <td class="time">2026-07-17 15:24:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24328.0</td>
+                    <td class="bid">4,160</td>
+                    <td class="ask">5,980</td>
+                    <td class="net-negative">-1,820</td>
+                    <td class="time">2026-07-17 15:27:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24328.1</td>
+                    <td class="bid">260</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+260</td>
+                    <td class="time">2026-07-17 15:26:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24328.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">260</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24328.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:23:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24328.9</td>
+                    <td class="bid">4,810</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+4,810</td>
+                    <td class="time">2026-07-17 15:24:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24329.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">8,840</td>
+                    <td class="net-negative">-8,840</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24329.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">910</td>
+                    <td class="net-negative">-910</td>
+                    <td class="time">2026-07-17 15:24:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24329.4</td>
+                    <td class="bid">3,380</td>
+                    <td class="ask">260</td>
+                    <td class="net-positive">+3,120</td>
+                    <td class="time">2026-07-17 15:27:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24329.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:24:04</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24329.9</td>
+                    <td class="bid">2,340</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,340</td>
+                    <td class="time">2026-07-17 15:24:11</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24330.0</td>
+                    <td class="bid big-cell">238,745 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+238,745</td>
+                    <td class="time">2026-07-17 15:27:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.1</td>
+                    <td class="bid">3,640</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+3,640</td>
+                    <td class="time">2026-07-17 15:27:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.2</td>
+                    <td class="bid">4,290</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+4,290</td>
+                    <td class="time">2026-07-17 15:27:10</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.3</td>
+                    <td class="bid">7,410</td>
+                    <td class="ask">130</td>
+                    <td class="net-positive">+7,280</td>
+                    <td class="time">2026-07-17 15:27:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.4</td>
+                    <td class="bid">16,185</td>
+                    <td class="ask">130</td>
+                    <td class="net-positive">+16,055</td>
+                    <td class="time">2026-07-17 15:28:07</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24330.5</td>
+                    <td class="bid big-cell">318,500 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+318,500</td>
+                    <td class="time">2026-07-17 15:27:06</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.6</td>
+                    <td class="bid">6,370</td>
+                    <td class="ask">910</td>
+                    <td class="net-positive">+5,460</td>
+                    <td class="time">2026-07-17 15:27:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.7</td>
+                    <td class="bid">21,840</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+21,840</td>
+                    <td class="time">2026-07-17 15:27:24</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.8</td>
+                    <td class="bid">33,865</td>
+                    <td class="ask">325</td>
+                    <td class="net-positive">+33,540</td>
+                    <td class="time">2026-07-17 15:27:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24330.9</td>
+                    <td class="bid">39,715</td>
+                    <td class="ask">1,885</td>
+                    <td class="net-positive">+37,830</td>
+                    <td class="time">2026-07-17 15:27:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.0</td>
+                    <td class="bid">25,870</td>
+                    <td class="ask">3,965</td>
+                    <td class="net-positive">+21,905</td>
+                    <td class="time">2026-07-17 15:28:15</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.1</td>
+                    <td class="bid">1,755</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+1,755</td>
+                    <td class="time">2026-07-17 15:28:03</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:24:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.4</td>
+                    <td class="bid">38,935</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+38,935</td>
+                    <td class="time">2026-07-17 15:25:06</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:24:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.6</td>
+                    <td class="bid">17,355</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+17,355</td>
+                    <td class="time">2026-07-17 15:25:01</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24331.7</td>
+                    <td class="bid big-cell">309,855 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">455</td>
+                    <td class="net-positive">+309,400</td>
+                    <td class="time">2026-07-17 15:25:17</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.8</td>
+                    <td class="bid">8,190</td>
+                    <td class="ask">975</td>
+                    <td class="net-positive">+7,215</td>
+                    <td class="time">2026-07-17 15:25:03</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24331.9</td>
+                    <td class="bid">30,290</td>
+                    <td class="ask">455</td>
+                    <td class="net-positive">+29,835</td>
+                    <td class="time">2026-07-17 15:27:25</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24332.0</td>
+                    <td class="bid big-cell">69,810 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">1,690</td>
+                    <td class="net-positive">+68,120</td>
+                    <td class="time">2026-07-17 15:28:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.1</td>
+                    <td class="bid">8,060</td>
+                    <td class="ask">390</td>
+                    <td class="net-positive">+7,670</td>
+                    <td class="time">2026-07-17 15:24:51</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.2</td>
+                    <td class="bid">3,510</td>
+                    <td class="ask">130</td>
+                    <td class="net-positive">+3,380</td>
+                    <td class="time">2026-07-17 15:28:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.3</td>
+                    <td class="bid">4,030</td>
+                    <td class="ask">520</td>
+                    <td class="net-positive">+3,510</td>
+                    <td class="time">2026-07-17 15:25:44</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.4</td>
+                    <td class="bid">12,610</td>
+                    <td class="ask">520</td>
+                    <td class="net-positive">+12,090</td>
+                    <td class="time">2026-07-17 15:26:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.5</td>
+                    <td class="bid">32,565</td>
+                    <td class="ask">520</td>
+                    <td class="net-positive">+32,045</td>
+                    <td class="time">2026-07-17 15:26:43</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.6</td>
+                    <td class="bid">5,525</td>
+                    <td class="ask">2,600</td>
+                    <td class="net-positive">+2,925</td>
+                    <td class="time">2026-07-17 15:27:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.7</td>
+                    <td class="bid">5,915</td>
+                    <td class="ask">260</td>
+                    <td class="net-positive">+5,655</td>
+                    <td class="time">2026-07-17 15:27:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.8</td>
+                    <td class="bid">10,725</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+10,725</td>
+                    <td class="time">2026-07-17 15:27:34</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24332.9</td>
+                    <td class="bid">37,310</td>
+                    <td class="ask">195</td>
+                    <td class="net-positive">+37,115</td>
+                    <td class="time">2026-07-17 15:28:08</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24333.0</td>
+                    <td class="bid big-cell">110,760 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">22,555</td>
+                    <td class="net-positive">+88,205</td>
+                    <td class="time">2026-07-17 15:28:32</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.1</td>
+                    <td class="bid">12,155</td>
+                    <td class="ask">3,510</td>
+                    <td class="net-positive">+8,645</td>
+                    <td class="time">2026-07-17 15:27:25</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.2</td>
+                    <td class="bid">5,395</td>
+                    <td class="ask">975</td>
+                    <td class="net-positive">+4,420</td>
+                    <td class="time">2026-07-17 15:26:25</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.3</td>
+                    <td class="bid">14,365</td>
+                    <td class="ask">2,470</td>
+                    <td class="net-positive">+11,895</td>
+                    <td class="time">2026-07-17 15:26:24</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24333.4</td>
+                    <td class="bid big-cell">562,380 <span class="whale">&#128040; BIG</span></td>
+                    <td class="ask">5,525</td>
+                    <td class="net-positive">+556,855</td>
+                    <td class="time">2026-07-17 15:28:32</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.5</td>
+                    <td class="bid">1,040</td>
+                    <td class="ask">4,680</td>
+                    <td class="net-negative">-3,640</td>
+                    <td class="time">2026-07-17 15:25:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">7,215</td>
+                    <td class="net-negative">-7,215</td>
+                    <td class="time">2026-07-17 15:25:11</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.7</td>
+                    <td class="bid">3,705</td>
+                    <td class="ask">2,275</td>
+                    <td class="net-positive">+1,430</td>
+                    <td class="time">2026-07-17 15:28:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:27:14</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24333.9</td>
+                    <td class="bid">20,085</td>
+                    <td class="ask">1,170</td>
+                    <td class="net-positive">+18,915</td>
+                    <td class="time">2026-07-17 15:28:18</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24334.0</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask big-cell">28,080 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-26,780</td>
+                    <td class="time">2026-07-17 15:28:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.1</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,380</td>
+                    <td class="net-negative">-3,380</td>
+                    <td class="time">2026-07-17 15:25:17</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">7,930</td>
+                    <td class="net-negative">-7,930</td>
+                    <td class="time">2026-07-17 15:27:01</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,040</td>
+                    <td class="net-negative">-1,040</td>
+                    <td class="time">2026-07-17 15:25:19</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.4</td>
+                    <td class="bid">38,220</td>
+                    <td class="ask">1,560</td>
+                    <td class="net-positive">+36,660</td>
+                    <td class="time">2026-07-17 15:28:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.5</td>
+                    <td class="bid">1,300</td>
+                    <td class="ask">7,345</td>
+                    <td class="net-negative">-6,045</td>
+                    <td class="time">2026-07-17 15:28:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.6</td>
+                    <td class="bid">2,210</td>
+                    <td class="ask">1,755</td>
+                    <td class="net-positive">+455</td>
+                    <td class="time">2026-07-17 15:28:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.7</td>
+                    <td class="bid">6,305</td>
+                    <td class="ask">2,470</td>
+                    <td class="net-positive">+3,835</td>
+                    <td class="time">2026-07-17 15:28:23</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.8</td>
+                    <td class="bid">15,795</td>
+                    <td class="ask">3,445</td>
+                    <td class="net-positive">+12,350</td>
+                    <td class="time">2026-07-17 15:28:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24334.9</td>
+                    <td class="bid">53,560</td>
+                    <td class="ask">10,725</td>
+                    <td class="net-positive">+42,835</td>
+                    <td class="time">2026-07-17 15:28:39</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24335.0</td>
+                    <td class="bid">46,865</td>
+                    <td class="ask big-cell">55,705 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-8,840</td>
+                    <td class="time">2026-07-17 15:28:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.1</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,560</td>
+                    <td class="net-negative">-1,560</td>
+                    <td class="time">2026-07-17 15:27:32</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">10,465</td>
+                    <td class="net-negative">-10,465</td>
+                    <td class="time">2026-07-17 15:27:30</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.3</td>
+                    <td class="bid">520</td>
+                    <td class="ask">4,810</td>
+                    <td class="net-negative">-4,290</td>
+                    <td class="time">2026-07-17 15:27:09</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.4</td>
+                    <td class="bid">3,705</td>
+                    <td class="ask">6,890</td>
+                    <td class="net-negative">-3,185</td>
+                    <td class="time">2026-07-17 15:27:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,120</td>
+                    <td class="net-negative">-3,120</td>
+                    <td class="time">2026-07-17 15:27:52</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.6</td>
+                    <td class="bid">9,425</td>
+                    <td class="ask">910</td>
+                    <td class="net-positive">+8,515</td>
+                    <td class="time">2026-07-17 15:28:47</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.7</td>
+                    <td class="bid">6,565</td>
+                    <td class="ask">1,690</td>
+                    <td class="net-positive">+4,875</td>
+                    <td class="time">2026-07-17 15:28:47</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.8</td>
+                    <td class="bid">8,905</td>
+                    <td class="ask">1,560</td>
+                    <td class="net-positive">+7,345</td>
+                    <td class="time">2026-07-17 15:28:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24335.9</td>
+                    <td class="bid">6,240</td>
+                    <td class="ask">1,820</td>
+                    <td class="net-positive">+4,420</td>
+                    <td class="time">2026-07-17 15:28:34</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24336.0</td>
+                    <td class="bid">22,230</td>
+                    <td class="ask big-cell">33,930 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-11,700</td>
+                    <td class="time">2026-07-17 15:28:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.1</td>
+                    <td class="bid">195</td>
+                    <td class="ask">4,875</td>
+                    <td class="net-negative">-4,680</td>
+                    <td class="time">2026-07-17 15:28:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,770</td>
+                    <td class="net-negative">-3,770</td>
+                    <td class="time">2026-07-17 15:26:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.3</td>
+                    <td class="bid">1,235</td>
+                    <td class="ask">3,770</td>
+                    <td class="net-negative">-2,535</td>
+                    <td class="time">2026-07-17 15:28:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.4</td>
+                    <td class="bid">3,120</td>
+                    <td class="ask">4,160</td>
+                    <td class="net-negative">-1,040</td>
+                    <td class="time">2026-07-17 15:27:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.5</td>
+                    <td class="bid">520</td>
+                    <td class="ask">7,280</td>
+                    <td class="net-negative">-6,760</td>
+                    <td class="time">2026-07-17 15:27:53</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">8,645</td>
+                    <td class="net-negative">-8,645</td>
+                    <td class="time">2026-07-17 15:28:08</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.7</td>
+                    <td class="bid">8,970</td>
+                    <td class="ask">6,760</td>
+                    <td class="net-positive">+2,210</td>
+                    <td class="time">2026-07-17 15:28:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.8</td>
+                    <td class="bid">12,480</td>
+                    <td class="ask">6,565</td>
+                    <td class="net-positive">+5,915</td>
+                    <td class="time">2026-07-17 15:29:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24336.9</td>
+                    <td class="bid">14,625</td>
+                    <td class="ask">21,515</td>
+                    <td class="net-negative">-6,890</td>
+                    <td class="time">2026-07-17 15:29:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.0</td>
+                    <td class="bid">1,690</td>
+                    <td class="ask">14,690</td>
+                    <td class="net-negative">-13,000</td>
+                    <td class="time">2026-07-17 15:29:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.1</td>
+                    <td class="bid">130</td>
+                    <td class="ask">2,925</td>
+                    <td class="net-negative">-2,795</td>
+                    <td class="time">2026-07-17 15:28:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,535</td>
+                    <td class="net-negative">-2,535</td>
+                    <td class="time">2026-07-17 15:28:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.3</td>
+                    <td class="bid">780</td>
+                    <td class="ask">2,600</td>
+                    <td class="net-negative">-1,820</td>
+                    <td class="time">2026-07-17 15:28:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.4</td>
+                    <td class="bid">2,080</td>
+                    <td class="ask">7,995</td>
+                    <td class="net-negative">-5,915</td>
+                    <td class="time">2026-07-17 15:29:18</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">7,475</td>
+                    <td class="net-negative">-7,475</td>
+                    <td class="time">2026-07-17 15:27:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,120</td>
+                    <td class="net-negative">-3,120</td>
+                    <td class="time">2026-07-17 15:28:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,340</td>
+                    <td class="net-negative">-2,340</td>
+                    <td class="time">2026-07-17 15:28:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">4,030</td>
+                    <td class="net-negative">-4,030</td>
+                    <td class="time">2026-07-17 15:26:19</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24337.9</td>
+                    <td class="bid">195</td>
+                    <td class="ask">4,745</td>
+                    <td class="net-negative">-4,550</td>
+                    <td class="time">2026-07-17 15:29:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.0</td>
+                    <td class="bid">19,175</td>
+                    <td class="ask">19,630</td>
+                    <td class="net-negative">-455</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.1</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,885</td>
+                    <td class="net-negative">-1,885</td>
+                    <td class="time">2026-07-17 15:25:57</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">5,070</td>
+                    <td class="net-negative">-5,070</td>
+                    <td class="time">2026-07-17 15:27:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,430</td>
+                    <td class="net-negative">-1,430</td>
+                    <td class="time">2026-07-17 15:24:25</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.4</td>
+                    <td class="bid">11,505</td>
+                    <td class="ask">780</td>
+                    <td class="net-positive">+10,725</td>
+                    <td class="time">2026-07-17 15:29:07</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.5</td>
+                    <td class="bid">4,680</td>
+                    <td class="ask">455</td>
+                    <td class="net-positive">+4,225</td>
+                    <td class="time">2026-07-17 15:29:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.6</td>
+                    <td class="bid">7,410</td>
+                    <td class="ask">2,925</td>
+                    <td class="net-positive">+4,485</td>
+                    <td class="time">2026-07-17 15:29:02</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.7</td>
+                    <td class="bid">1,885</td>
+                    <td class="ask">2,015</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:00</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.8</td>
+                    <td class="bid">2,795</td>
+                    <td class="ask">520</td>
+                    <td class="net-positive">+2,275</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24338.9</td>
+                    <td class="bid">32,695</td>
+                    <td class="ask">3,640</td>
+                    <td class="net-positive">+29,055</td>
+                    <td class="time">2026-07-17 15:29:15</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24339.0</td>
+                    <td class="bid">31,135</td>
+                    <td class="ask big-cell">70,720 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-39,585</td>
+                    <td class="time">2026-07-17 15:29:25</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.1</td>
+                    <td class="bid">5,850</td>
+                    <td class="ask">2,015</td>
+                    <td class="net-positive">+3,835</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.2</td>
+                    <td class="bid">780</td>
+                    <td class="ask">1,300</td>
+                    <td class="net-negative">-520</td>
+                    <td class="time">2026-07-17 15:29:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.3</td>
+                    <td class="bid">650</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+650</td>
+                    <td class="time">2026-07-17 15:29:18</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.4</td>
+                    <td class="bid">2,470</td>
+                    <td class="ask">1,820</td>
+                    <td class="net-positive">+650</td>
+                    <td class="time">2026-07-17 15:29:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.5</td>
+                    <td class="bid">260</td>
+                    <td class="ask">1,170</td>
+                    <td class="net-negative">-910</td>
+                    <td class="time">2026-07-17 15:29:15</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">25,740</td>
+                    <td class="net-negative">-25,740</td>
+                    <td class="time">2026-07-17 15:28:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24339.9</td>
+                    <td class="bid">2,730</td>
+                    <td class="ask">3,900</td>
+                    <td class="net-negative">-1,170</td>
+                    <td class="time">2026-07-17 15:29:23</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24340.0</td>
+                    <td class="bid">16,315</td>
+                    <td class="ask big-cell">76,765 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-60,450</td>
+                    <td class="time">2026-07-17 15:29:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.1</td>
+                    <td class="bid">780</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+780</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,300</td>
+                    <td class="net-negative">-1,300</td>
+                    <td class="time">2026-07-17 15:29:05</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.3</td>
+                    <td class="bid">520</td>
+                    <td class="ask">1,885</td>
+                    <td class="net-negative">-1,365</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.5</td>
+                    <td class="bid">10,790</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+10,790</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.6</td>
+                    <td class="bid">6,630</td>
+                    <td class="ask">9,880</td>
+                    <td class="net-negative">-3,250</td>
+                    <td class="time">2026-07-17 15:29:25</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">3,250</td>
+                    <td class="net-negative">-3,250</td>
+                    <td class="time">2026-07-17 15:28:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24340.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,300</td>
+                    <td class="net-negative">-1,300</td>
+                    <td class="time">2026-07-17 15:29:03</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24341.0</td>
+                    <td class="bid">6,760</td>
+                    <td class="ask">13,715</td>
+                    <td class="net-negative">-6,955</td>
+                    <td class="time">2026-07-17 15:29:56</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24341.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,145</td>
+                    <td class="net-negative">-2,145</td>
+                    <td class="time">2026-07-17 15:29:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24341.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">325</td>
+                    <td class="net-negative">-325</td>
+                    <td class="time">2026-07-17 15:28:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24341.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,950</td>
+                    <td class="net-negative">-1,950</td>
+                    <td class="time">2026-07-17 15:29:20</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24341.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">5,850</td>
+                    <td class="net-negative">-5,850</td>
+                    <td class="time">2026-07-17 15:29:12</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24342.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">8,385</td>
+                    <td class="net-negative">-8,385</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24342.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">390</td>
+                    <td class="net-negative">-390</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24342.4</td>
+                    <td class="bid">3,055</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+3,055</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24342.9</td>
+                    <td class="bid">780</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+780</td>
+                    <td class="time">2026-07-17 15:29:41</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24343.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24343.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:29:22</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24343.3</td>
+                    <td class="bid">2,340</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,340</td>
+                    <td class="time">2026-07-17 15:29:33</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24343.4</td>
+                    <td class="bid">22,555</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+22,555</td>
+                    <td class="time">2026-07-17 15:29:58</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24343.9</td>
+                    <td class="bid">13,065</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+13,065</td>
+                    <td class="time">2026-07-17 15:29:40</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24344.0</td>
+                    <td class="bid">10,075</td>
+                    <td class="ask">10,465</td>
+                    <td class="net-negative">-390</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24344.4</td>
+                    <td class="bid">7,410</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+7,410</td>
+                    <td class="time">2026-07-17 15:29:43</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24344.7</td>
+                    <td class="bid">2,925</td>
+                    <td class="ask">0</td>
+                    <td class="net-positive">+2,925</td>
+                    <td class="time">2026-07-17 15:29:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24344.8</td>
+                    <td class="bid">38,740</td>
+                    <td class="ask">2,145</td>
+                    <td class="net-positive">+36,595</td>
+                    <td class="time">2026-07-17 15:29:53</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24344.9</td>
+                    <td class="bid">12,285</td>
+                    <td class="ask">1,430</td>
+                    <td class="net-positive">+10,855</td>
+                    <td class="time">2026-07-17 15:29:52</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.0</td>
+                    <td class="bid">2,210</td>
+                    <td class="ask">12,350</td>
+                    <td class="net-negative">-10,140</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.1</td>
+                    <td class="bid">520</td>
+                    <td class="ask">130</td>
+                    <td class="net-positive">+390</td>
+                    <td class="time">2026-07-17 15:29:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">325</td>
+                    <td class="net-negative">-325</td>
+                    <td class="time">2026-07-17 15:29:33</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:35</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24345.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:28</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24346.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">780</td>
+                    <td class="net-negative">-780</td>
+                    <td class="time">2026-07-17 15:29:30</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24346.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:29:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24346.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">260</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:29:31</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24347.0</td>
+                    <td class="bid">650</td>
+                    <td class="ask">10,400</td>
+                    <td class="net-negative">-9,750</td>
+                    <td class="time">2026-07-17 15:29:43</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24347.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">260</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:29:43</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24347.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,105</td>
+                    <td class="net-negative">-1,105</td>
+                    <td class="time">2026-07-17 15:29:37</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24347.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">260</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:29:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24347.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,105</td>
+                    <td class="net-negative">-1,105</td>
+                    <td class="time">2026-07-17 15:29:41</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">13,390</td>
+                    <td class="net-negative">-13,390</td>
+                    <td class="time">2026-07-17 15:29:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.2</td>
+                    <td class="bid">65</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">260</td>
+                    <td class="net-negative">-260</td>
+                    <td class="time">2026-07-17 15:29:50</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:29:40</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.7</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:29:41</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:29:41</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24348.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">1,235</td>
+                    <td class="net-negative">-1,235</td>
+                    <td class="time">2026-07-17 15:29:43</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24349.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask big-cell">100,555 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-100,555</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.1</td>
+                    <td class="bid">0</td>
+                    <td class="ask">650</td>
+                    <td class="net-negative">-650</td>
+                    <td class="time">2026-07-17 15:29:45</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">2,145</td>
+                    <td class="net-negative">-2,145</td>
+                    <td class="time">2026-07-17 15:29:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.3</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">910</td>
+                    <td class="net-negative">-910</td>
+                    <td class="time">2026-07-17 15:29:48</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.5</td>
+                    <td class="bid">0</td>
+                    <td class="ask">8,970</td>
+                    <td class="net-negative">-8,970</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.6</td>
+                    <td class="bid">0</td>
+                    <td class="ask">195</td>
+                    <td class="net-negative">-195</td>
+                    <td class="time">2026-07-17 15:29:47</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24349.9</td>
+                    <td class="bid">0</td>
+                    <td class="ask">910</td>
+                    <td class="net-negative">-910</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row big-row">
+                    <td class="price">24350.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask big-cell">118,365 <span class="whale">&#128040; BIG</span></td>
+                    <td class="net-negative">-118,365</td>
+                    <td class="time">2026-07-17 16:21:27</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24350.4</td>
+                    <td class="bid">0</td>
+                    <td class="ask">390</td>
+                    <td class="net-negative">-390</td>
+                    <td class="time">2026-07-17 15:29:53</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24351.8</td>
+                    <td class="bid">0</td>
+                    <td class="ask">65</td>
+                    <td class="net-negative">-65</td>
+                    <td class="time">2026-07-17 15:29:55</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24352.0</td>
+                    <td class="bid">0</td>
+                    <td class="ask">520</td>
+                    <td class="net-negative">-520</td>
+                    <td class="time">2026-07-17 15:29:56</td>
+                </tr>
+                <tr class="row">
+                    <td class="price">24352.2</td>
+                    <td class="bid">0</td>
+                    <td class="ask">130</td>
+                    <td class="net-negative">-130</td>
+                    <td class="time">2026-07-17 15:29:58</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>&#128040; BIG = cumulative qty at least 3x that side's average &middot; Generated by CumulativeDepthBook &middot; 2026-07-17 16:29:41</footer>
+</div>
+</body>
+</html>

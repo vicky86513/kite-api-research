@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Price Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #08090c;
+        --bg-glow: #10141d;
+        --panel: #11151d;
+        --panel-2: #151a24;
+        --border: #232a38;
+        --text: #e8ecf1;
+        --muted: #6f7a8a;
+        --buy: #00d38a;
+        --sell: #ff4d6a;
+        --amber: #f5b53f;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+        margin: 0;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        background:
+            radial-gradient(1100px 500px at 12% -10%, var(--bg-glow), transparent 60%),
+            var(--bg);
+        color: var(--text);
+        padding: 22px 24px;
+        display: flex;
+        overflow: hidden;
+    }
+    .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        height: 100%;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+    }
+    .title-block h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin: 0 0 4px;
+    }
+    .title-block .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--amber);
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+    }
+    .live-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: var(--amber);
+        animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(245,181,63,0.55); }
+        70%  { box-shadow: 0 0 0 8px rgba(245,181,63,0); }
+        100% { box-shadow: 0 0 0 0 rgba(245,181,63,0); }
+    }
+    .subtitle { color: var(--muted); font-size: 12.5px; }
+
+    .tabs {
+        display: flex;
+        gap: 8px;
+    }
+    .tab {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        color: var(--muted);
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 16px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+    .tab:hover { color: var(--text); border-color: #3a4356; }
+    .tab.active { color: #08090c; background: var(--amber); border-color: var(--amber); }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(110px, 1fr));
+        gap: 8px;
+        margin-bottom: 14px;
+        flex-shrink: 0;
+    }
+    .stat {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 11px 13px;
+    }
+    .stat .label {
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--muted);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+    .stat .value { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat .value.buy { color: var(--buy); }
+    .stat .value.sell { color: var(--sell); }
+    .stat .subvalue { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+
+    .balance-bar {
+        flex-shrink: 0;
+        margin-bottom: 14px;
+    }
+    .balance-track {
+        display: flex;
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.06);
+    }
+    .balance-fill { height: 100%; transition: width 0.4s ease; }
+    .balance-fill.buy { background: var(--buy); }
+    .balance-fill.sell { background: var(--sell); }
+    .balance-labels {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 6px;
+        font-size: 11px;
+    }
+    .balance-label { font-weight: 600; letter-spacing: 0.3px; }
+    .balance-label.buy { color: var(--buy); }
+    .balance-label.sell { color: var(--sell); }
+    .balance-title {
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--muted);
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .table-scroll {
+        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+        scroll-behavior: smooth;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        text-align: right;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--muted);
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel-2);
+    }
+    thead th:first-child { text-align: left; }
+    tbody td {
+        text-align: right;
+        padding: 11px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.035);
+        font-variant-numeric: tabular-nums;
+        font-size: 13.5px;
+        vertical-align: middle;
+    }
+    tbody tr.row { transition: background 0.2s; }
+    tbody tr.row:hover { background: rgba(255,255,255,0.02); }
+    tbody tr.fresh { background: rgba(245,181,63,0.05); }
+    tbody tr.fresh td.price { position: relative; }
+    tbody tr.fresh td.price::before {
+        content: "";
+        position: absolute; left: -10px; top: 50%;
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--amber);
+        transform: translateY(-50%);
+        animation: pulse 1.8s infinite;
+    }
+    tbody tr.latest-update { background: rgba(245,181,63,0.09); }
+    tbody tr.latest-update td.price { color: var(--amber); }
+    tbody tr.latest-update td.price::after {
+        content: "\2605";
+        margin-left: 8px;
+        font-size: 10px;
+        color: var(--amber);
+    }
+    td.price { text-align: left; font-weight: 600; color: var(--text); padding-left: 26px; }
+    td.bid { color: var(--buy); }
+    td.ask { color: var(--sell); }
+    td.net-cell { min-width: 190px; }
+    td.net-cell > span.net-value { display: inline-block; min-width: 64px; font-weight: 600; }
+    .net-positive { color: var(--buy); }
+    .net-negative { color: var(--sell); }
+    .net-neutral { color: var(--muted); }
+    .imbalance-track {
+        position: relative;
+        display: inline-block;
+        width: 80px;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(255,255,255,0.06);
+        vertical-align: middle;
+        margin-right: 10px;
+        overflow: hidden;
+    }
+    .imbalance-mid {
+        position: absolute; left: 50%; top: -2px;
+        width: 1px; height: 10px;
+        background: rgba(255,255,255,0.15);
+    }
+    .imbalance-fill {
+        position: absolute; top: 0; height: 100%;
+        border-radius: 3px;
+    }
+    .imbalance-fill.bar-buy { left: 50%; background: var(--buy); }
+    .imbalance-fill.bar-sell { right: 50%; background: var(--sell); }
+    td.time { color: var(--muted); font-size: 11.5px; }
+    td.total-qty { color: var(--text); font-weight: 600; }
+    td.empty { text-align: center; color: var(--muted); padding: 48px 24px; font-size: 13px; line-height: 1.7; }
+    td.empty code {
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 2px 6px;
+        color: var(--amber);
+    }
+
+    footer {
+        text-align: center;
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 18px;
+        letter-spacing: 0.3px;
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="title-block">
+            <div class="eyebrow"><span class="live-dot"></span>Live &middot; Depth level 5</div>
+            <h1 id="page-title">Live Price Book</h1>
+            <div class="subtitle" id="subtitle">Connecting&hellip;</div>
+        </div>
+        <div class="tabs" id="tabs"></div>
+    </header>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="label">Total Bid Qty</div>
+            <div class="value buy" id="stat-bid">&mdash;</div>
+        </div>
+        <div class="stat">
+            <div class="label">Total Ask Qty</div>
+            <div class="value sell" id="stat-ask">&mdash;</div>
+        </div>
+        <div class="stat">
+            <div class="label">Net Imbalance</div>
+            <div class="value" id="stat-net">&mdash;</div>
+        </div>
+        <div class="stat">
+            <div class="label">Max Net Bid</div>
+            <div class="value buy" id="stat-max-bid-price">&mdash;</div>
+            <div class="subvalue" id="stat-max-bid-qty">&nbsp;</div>
+        </div>
+        <div class="stat">
+            <div class="label">Max Net Ask</div>
+            <div class="value sell" id="stat-max-ask-price">&mdash;</div>
+            <div class="subvalue" id="stat-max-ask-qty">&nbsp;</div>
+        </div>
+        <div class="stat">
+            <div class="label">Last Refresh</div>
+            <div class="value" id="stat-refresh">&mdash;</div>
+        </div>
+    </div>
+
+    <div class="balance-bar" id="balance-bar">
+        <div class="balance-track">
+            <div class="balance-fill buy" id="balance-fill-bid" style="width:50%"></div>
+            <div class="balance-fill sell" id="balance-fill-ask" style="width:50%"></div>
+        </div>
+        <div class="balance-labels">
+            <span class="balance-label buy">BID <b id="balance-bid-pct">&mdash;</b></span>
+            <span class="balance-title">Overall Book Balance</span>
+            <span class="balance-label sell">ASK <b id="balance-ask-pct">&mdash;</b></span>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="table-scroll" id="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strike Price</th>
+                        <th>Bid Qty (cum.)</th>
+                        <th>Ask Qty (cum.)</th>
+                        <th>Net (Bid &minus; Ask)</th>
+                        <th>Total Qty (Bid+Ask)</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr><td colspan="6" class="empty">Loading&hellip;</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer id="footer">&nbsp;</footer>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// CONFIG — add/remove sources here. Each `file` must be a JSON file written
+// by PriceBookWriter (price_book.py) sitting next to this HTML file.
+// This page itself never changes — it just polls whichever JSON file is
+// selected and re-renders. Run mcx_crudeoil_tracker.py / 
+// nifty_current_month_tracker.py to feed it live data.
+// ---------------------------------------------------------------------------
+// Futures tabs stay static/hardcoded here, same as before — unaffected by
+// whatever's in options_tracker.py's OPTIONS list.
+const FUTURES_SOURCES = [
+    { id: "mcx",    fallbackLabel: "MCX Crude Oil",        file: "Excel/crude_oil_price_book.json" },
+    { id: "nifty",  fallbackLabel: "NIFTY Current Month",  file: "Excel/nifty_price_book.json" },
+    { id: "sensex", fallbackLabel: "SENSEX Current Month", file: "Excel/sensex_price_book.json" },
+];
+
+// CE/PE option tabs are NOT hardcoded — they're built dynamically from
+// Excel/options_manifest.json, which options_tracker.py rewrites every time
+// it starts based on whatever's currently active (uncommented) in its
+// OPTIONS list. Add/remove an entry there, restart the tracker, refresh
+// this page — the tabs (and file names) follow automatically.
+const OPTIONS_MANIFEST_FILE = "Excel/options_manifest.json";
+let SOURCES = [...FUTURES_SOURCES];
+
+const REFRESH_MS = 4000;
+const OPTIONS_MANIFEST_REFRESH_MS = 30000;
+const FRESH_WINDOW_SECONDS = 10;
+const ACTIVE_SOURCE_STORAGE_KEY = "priceBookDashboard.activeSourceId";
+
+// Tab labels actually shown come from here — populated from each JSON's
+// "title" field, which is exactly the title=... you hardcode in the Python
+// tracker (e.g. PriceBookWriter(..., title="NIFTY JUL 25000 CE")). This
+// keeps the dashboard tabs automatically in sync with the tracker script —
+// no need to duplicate/re-type labels in two places.
+const sourceLabels = {};
+
+// Matches PriceBookWriter._dated_filepath on the Python side: every price
+// book file now has today's date baked into its name (a new file each day),
+// so every fetch needs that same date inserted before the extension.
+function todayDateStr() {
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+}
+
+function datedFile(path) {
+    const idx = path.lastIndexOf(".");
+    if (idx === -1) return `${path}_${todayDateStr()}`;
+    return `${path.slice(0, idx)}_${todayDateStr()}${path.slice(idx)}`;
+}
+
+function tabLabel(src) {
+    return sourceLabels[src.id] || src.fallbackLabel;
+}
+
+function getInitialSource() {
+    const savedId = localStorage.getItem(ACTIVE_SOURCE_STORAGE_KEY);
+    const match = SOURCES.find(s => s.id === savedId);
+    return match || SOURCES[0];
+}
+
+let activeSource = getInitialSource();
+let optionsManifestLoadedOnce = false;
+
+// Fetches Excel/options_manifest.json and rebuilds SOURCES as
+// FUTURES_SOURCES + two tabs (CE, PE) per manifest entry.
+async function loadOptionsManifest() {
+    let optionEntries = [];
+    try {
+        const res = await fetch(OPTIONS_MANIFEST_FILE + "?t=" + Date.now(), { cache: "no-store" });
+        if (res.ok) {
+            const data = await res.json();
+            optionEntries = data.options || [];
+        }
+    } catch (err) {
+        // manifest not written yet (options_tracker.py hasn't run) — just show futures tabs
+    }
+
+    const optionSources = [];
+    optionEntries.forEach(opt => {
+        optionSources.push({
+            id: "opt_" + opt.file_prefix + "_ce",
+            fallbackLabel: opt.label + " CE",
+            file: "Excel/" + opt.ce_file,
+        });
+        optionSources.push({
+            id: "opt_" + opt.file_prefix + "_pe",
+            fallbackLabel: opt.label + " PE",
+            file: "Excel/" + opt.pe_file,
+        });
+    });
+
+    SOURCES = [...FUTURES_SOURCES, ...optionSources];
+
+    if (!optionsManifestLoadedOnce) {
+        // First load: honor whatever tab was saved from a previous session,
+        // now that the full (futures + options) list is known.
+        optionsManifestLoadedOnce = true;
+        const savedId = localStorage.getItem(ACTIVE_SOURCE_STORAGE_KEY);
+        const savedMatch = SOURCES.find(s => s.id === savedId);
+        if (savedMatch) activeSource = savedMatch;
+    } else if (!SOURCES.find(s => s.id === activeSource.id)) {
+        // A later manifest refresh removed the tab you were on (e.g. you
+        // commented it out and restarted the tracker) — fall back gracefully.
+        activeSource = SOURCES[0];
+    }
+
+    renderTabs();
+    loadAllTabLabels();
+    loadAndRender();
+}
+
+function renderTabs() {
+    const tabsEl = document.getElementById("tabs");
+    tabsEl.innerHTML = "";
+    SOURCES.forEach(src => {
+        const btn = document.createElement("button");
+        btn.className = "tab" + (src.id === activeSource.id ? " active" : "");
+        btn.textContent = tabLabel(src);
+        btn.onclick = () => {
+            activeSource = src;
+            localStorage.setItem(ACTIVE_SOURCE_STORAGE_KEY, src.id);
+            renderTabs();
+            document.getElementById("table-body").innerHTML =
+                '<tr><td colspan="6" class="empty">Loading&hellip;</td></tr>';
+            loadAndRender();
+        };
+        tabsEl.appendChild(btn);
+    });
+}
+
+// Fetch every source's JSON once (in parallel) just to read its "title"
+// field, so tab labels reflect the tracker's hardcoded title from the
+// moment the page loads — even for tabs you haven't clicked into yet.
+async function loadAllTabLabels() {
+    await Promise.allSettled(SOURCES.map(async src => {
+        try {
+            const res = await fetch(datedFile(src.file) + "?t=" + Date.now(), { cache: "no-store" });
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data && data.title) {
+                sourceLabels[src.id] = data.title;
+            }
+        } catch (err) {
+            // leave fallbackLabel in place if this source isn't available yet
+        }
+    }));
+    renderTabs();
+}
+
+function parseTimestamp(str) {
+    if (!str) return null;
+    // "YYYY-MM-DD HH:MM:SS" -> treat as local time
+    const d = new Date(str.replace(" ", "T"));
+    return isNaN(d.getTime()) ? null : d;
+}
+
+function renderEmptyState(message) {
+    document.getElementById("table-body").innerHTML =
+        `<tr><td colspan="6" class="empty">${message}</td></tr>`;
+    document.getElementById("stat-bid").textContent = "—";
+    document.getElementById("stat-ask").textContent = "—";
+    document.getElementById("stat-net").textContent = "—";
+    document.getElementById("stat-max-bid-price").textContent = "—";
+    document.getElementById("stat-max-bid-qty").innerHTML = "&nbsp;";
+    document.getElementById("stat-max-ask-price").textContent = "—";
+    document.getElementById("stat-max-ask-qty").innerHTML = "&nbsp;";
+    document.getElementById("balance-fill-bid").style.width = "50%";
+    document.getElementById("balance-fill-ask").style.width = "50%";
+    document.getElementById("balance-bid-pct").textContent = "—";
+    document.getElementById("balance-ask-pct").textContent = "—";
+}
+
+function render(data) {
+    const rows = data.rows || [];
+    document.getElementById("page-title").textContent = data.title || tabLabel(activeSource);
+    document.getElementById("subtitle").textContent =
+        `Polling every ${REFRESH_MS / 1000}s \u00b7 ${rows.length} price levels tracked`;
+
+    // Keep the active tab's cached label fresh too, in case the title changes.
+    if (data.title && sourceLabels[activeSource.id] !== data.title) {
+        sourceLabels[activeSource.id] = data.title;
+        renderTabs();
+    }
+
+    if (rows.length === 0) {
+        renderEmptyState("Waiting for live ticks&hellip;");
+        document.getElementById("stat-refresh").textContent = new Date().toLocaleTimeString();
+        return;
+    }
+
+    const totalBid = rows.reduce((s, r) => s + r.bid_qty, 0);
+    const totalAsk = rows.reduce((s, r) => s + r.ask_qty, 0);
+    const totalNet = totalBid - totalAsk;
+    const maxAbsNet = Math.max(1, ...rows.map(r => Math.abs(r.net)));
+    const now = new Date();
+
+    // Row with the strongest bid-side net skew (highest positive net),
+    // and row with the strongest ask-side net skew (most negative net).
+    const maxNetBidRow = rows.reduce((best, r) => (r.net > best.net ? r : best), rows[0]);
+    const maxNetAskRow = rows.reduce((best, r) => (r.net < best.net ? r : best), rows[0]);
+
+    // Row whose "last updated" timestamp is the most recent — i.e. whichever
+    // strike price just changed. This is what we auto-center the table on,
+    // so you can watch the latest bid/ask change without scrolling to find it.
+    let latestRow = rows[0];
+    let latestTime = parseTimestamp(rows[0].last_updated) || new Date(0);
+    for (const r of rows) {
+        const t = parseTimestamp(r.last_updated);
+        if (t && t > latestTime) {
+            latestTime = t;
+            latestRow = r;
+        }
+    }
+
+    document.getElementById("stat-bid").textContent = totalBid.toLocaleString();
+    document.getElementById("stat-ask").textContent = totalAsk.toLocaleString();
+    const netStatEl = document.getElementById("stat-net");
+    netStatEl.textContent = (totalNet > 0 ? "+" : "") + totalNet.toLocaleString();
+    netStatEl.className = "value " + (totalNet > 0 ? "buy" : totalNet < 0 ? "sell" : "");
+    document.getElementById("stat-refresh").textContent = now.toLocaleTimeString();
+
+    document.getElementById("stat-max-bid-price").textContent = maxNetBidRow.price;
+    document.getElementById("stat-max-bid-qty").textContent =
+        `Net: ${maxNetBidRow.net > 0 ? "+" : ""}${maxNetBidRow.net.toLocaleString()}`;
+    document.getElementById("stat-max-ask-price").textContent = maxNetAskRow.price;
+    document.getElementById("stat-max-ask-qty").textContent =
+        `Net: ${maxNetAskRow.net > 0 ? "+" : ""}${maxNetAskRow.net.toLocaleString()}`;
+
+    // Overall book balance — what fraction of ALL quantity (across every
+    // strike) sits on the bid side vs the ask side, so you can tell at a
+    // glance which side dominates the whole book, not just one row.
+    const grandTotal = totalBid + totalAsk;
+    const bidPct = grandTotal > 0 ? (totalBid / grandTotal * 100) : 50;
+    const askPct = 100 - bidPct;
+    document.getElementById("balance-fill-bid").style.width = bidPct.toFixed(1) + "%";
+    document.getElementById("balance-fill-ask").style.width = askPct.toFixed(1) + "%";
+    document.getElementById("balance-bid-pct").textContent = bidPct.toFixed(1) + "%";
+    document.getElementById("balance-ask-pct").textContent = askPct.toFixed(1) + "%";
+
+    const sorted = [...rows].sort((a, b) => a.price - b.price);
+
+    const rowsHtml = sorted.map(r => {
+        const net = r.net;
+        let netClass = "net-neutral", sign = "", barSide = "";
+        if (net > 0) { netClass = "net-positive"; sign = "+"; barSide = "bar-buy"; }
+        else if (net < 0) { netClass = "net-negative"; barSide = "bar-sell"; }
+
+        const barPct = (Math.abs(net) / maxAbsNet * 100).toFixed(1);
+
+        let freshClass = "";
+        const updatedDt = parseTimestamp(r.last_updated);
+        if (updatedDt && (now - updatedDt) / 1000 <= FRESH_WINDOW_SECONDS) {
+            freshClass = " fresh";
+        }
+
+        const latestClass = r.price === latestRow.price ? " latest-update" : "";
+
+        return `
+            <tr class="row${freshClass}${latestClass}" data-price="${r.price}">
+                <td class="price">${r.price}</td>
+                <td class="bid">${r.bid_qty.toLocaleString()}</td>
+                <td class="ask">${r.ask_qty.toLocaleString()}</td>
+                <td class="net-cell">
+                    <div class="imbalance-track">
+                        <span class="imbalance-fill ${barSide}" style="width:${barPct}%"></span>
+                        <span class="imbalance-mid"></span>
+                    </div>
+                    <span class="net-value ${netClass}">${sign}${net.toLocaleString()}</span>
+                </td>
+                <td class="total-qty">${(r.bid_qty + r.ask_qty).toLocaleString()}</td>
+                <td class="time">${r.last_updated || "-"}</td>
+            </tr>`;
+    }).join("");
+
+    document.getElementById("table-body").innerHTML = rowsHtml;
+    document.getElementById("footer").textContent =
+        `Source: ${datedFile(activeSource.file)} \u00b7 Generated at ${data.generated_at || "-"}`;
+
+    // Auto-center whichever strike price was updated most recently, so you
+    // can watch the latest bid/ask change without touching the scroll wheel.
+    const latestEl = document.querySelector(`tr[data-price="${latestRow.price}"]`);
+    if (latestEl) {
+        latestEl.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+}
+
+async function loadAndRender() {
+    try {
+        const res = await fetch(datedFile(activeSource.file) + "?t=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        render(data);
+    } catch (err) {
+        renderEmptyState(
+            `No data yet for <b>${tabLabel(activeSource)}</b>.<br>` +
+            `Make sure <code>${datedFile(activeSource.file)}</code> is in the same folder as this page, ` +
+            `run the matching tracker script, and serve this folder over HTTP ` +
+            `(e.g. <code>python -m http.server</code>) rather than opening the file directly.`
+        );
+        document.getElementById("subtitle").textContent = "Waiting for data\u2026";
+    }
+}
+
+renderTabs();
+loadOptionsManifest();
+loadAndRender();
+setInterval(loadAndRender, REFRESH_MS);
+setInterval(loadOptionsManifest, OPTIONS_MANIFEST_REFRESH_MS);
+</script>
+</body>
+</html>

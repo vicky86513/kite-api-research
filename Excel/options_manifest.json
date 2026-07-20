@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-17 14:37:53",
+  "options": [
+    {
+      "label": "NIFTY 24200",
+      "file_prefix": "nifty_24200",
+      "ce_file": "nifty_24200_ce_price_book.json",
+      "pe_file": "nifty_24200_pe_price_book.json"
+    },
+    {
+      "label": "NIFTY 23800",
+      "file_prefix": "nifty_23800",
+      "ce_file": "nifty_23800_ce_price_book.json",
+      "pe_file": "nifty_23800_pe_price_book.json"
+    }
+  ]
+}
